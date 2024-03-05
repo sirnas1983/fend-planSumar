@@ -1,0 +1,95 @@
+/* CSS PARA SNACKBAR */
+
+.snackbar-error {
+    .mdc-snackbar__surface {
+        background-color: red !important;
+        color: white;
+        font-weight: 800;
+    }
+
+    .mat-snack-bar-container {
+        border-radius: 20px !important;
+    }
+}
+
+.snackbar-success {
+    .mdc-snackbar__surface {
+        background-color: rgb(97, 136, 226) !important;
+        color: white;
+        font-weight: 800;
+    }
+
+    .mat-snack-bar-container {
+        border-radius: 20px !important;
+    }
+}
+
+.cdk-overlay-container {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Cambio paleta de primary al color de plan sumar */
+
+.btn-primary{
+    background-color: rgb(0, 145, 230);
+    color:white;
+    border:none;
+}
+
+.primary{
+    background-color: rgb(0, 145, 230);
+}
+
+/* CSS PARA NOMBRE WELCOME PAGE */
+
+.welcome-screen-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    height: 100vh; /* Ocupar toda la altura de la pantalla */
+    background-color: rgb(0, 145, 230);
+    color: white;
+    animation: fadeInOut 3.5s forwards;
+}
+
+.welcome-message, .username {
+    opacity: 0;
+    animation: fadeInOut 3.5s forwards;
+    text-align: center; /* Centrar el texto horizontalmente */
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 1000;
+}
+
+.username {
+    font-size: 1.5rem;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeInOut 3.5s forwards;
+
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0; /* Start with opacity 0 */
+    }
+    50%{
+        opacity: 1;
+    }
+    50% {
+        opacity: 1; /* Hold opacity for the next 2.2s */
+    }
+    100% {
+        opacity: 0; /* Fade out over the last 350ms */
+    }
+}
