@@ -93,3 +93,11 @@
         opacity: 0; /* Fade out over the last 350ms */
     }
 }
+
+/* logo en dashboard */
+
+.navbar .navbar-brand-wrapper .navbar-brand img{
+    padding: 0 !important;
+    width: auto !important;
+    height: 5rem !important;
+}

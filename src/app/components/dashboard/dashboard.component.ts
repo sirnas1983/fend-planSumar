@@ -10,11 +10,14 @@ import { AuthService } from '../../services/auth.service';
 
 export class DashboardComponent {
 username : String = '';
+rol : String = '';
 
 public constructor(private authService:  AuthService){ 
   this.authService.userEmail$.subscribe(data =>{
     this.username = data;
+    this.rol = this.authService.getUserRoles()[0];
   })
+  
 }
 
 }
