@@ -4,12 +4,31 @@ import { WelcomeScreenComponent } from './components/welcome-screen/welcome-scre
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
+import { EfectoresComponent } from './components/efectores/efectores.component';
+import { ExpedientesComponent } from './components/expedientes/expedientes.component';
+import { ResolucionesComponent } from './components/resoluciones/resoluciones.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { AdminGuard } from './guards/admin.guard';
+import { EfectorFormComponent } from './components/efector-form/efector-form.component';
 
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeScreenComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
+      {
+        path: 'efectores', component: EfectoresComponent, children:
+          [
+            { path: 'crear', component: EfectorFormComponent },
+            { path: 'modificar', component: EfectorFormComponent }
+          ]
+      },
+      { path: 'expedientes', component: ExpedientesComponent },
+      { path: 'resoluciones', component: ResolucionesComponent },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard] },
+    ]
+  },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

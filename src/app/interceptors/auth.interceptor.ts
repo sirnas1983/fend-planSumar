@@ -6,15 +6,14 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService,) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     if (request.url.endsWith('/users/authenticate')) {
       return next.handle(request);
     }
-
     const token = this.tokenService.getToken();
-
     if (token) {
       request = request.clone({
         setHeaders: {
@@ -22,7 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-
     return next.handle(request);
   }
 }

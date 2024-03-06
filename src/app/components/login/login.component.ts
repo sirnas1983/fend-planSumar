@@ -25,7 +25,6 @@ export class LoginComponent {
     };
     this.authService.login(credentials).subscribe(
       () => {
-
         this.router.navigate(['/welcome']); 
       },
       error => {

@@ -5,19 +5,11 @@ import { TokenService } from '../services/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   constructor(private tokenService: TokenService, private router: Router) {}
 
   canActivate(): boolean {
-
-    const token = this.tokenService.getToken();
-    if (token) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);     
-      return false;
-    }
-   
+    return this.tokenService.isAdmin();
   }
 }

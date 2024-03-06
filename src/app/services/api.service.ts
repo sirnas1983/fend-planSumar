@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ROOT } from '../constants/constants';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,27 @@ export class ApiService {
 
   fetchData(endpoint: string) {
     const url = `${API_ROOT}/${endpoint}`;
-    return this.http.get(url);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(url, { headers });
   }
 
   postData(endpoint: string, body: any) {
     const url = `${API_ROOT}/${endpoint}`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post(url, JSON.stringify(body), { headers });
+    return this.http.post(url, body, {headers}).pipe(
+      catchError((error) => {
+        return throwError(error); // Pass the error to the subscriber
+      })
+    );
   }
 
   putData(endpoint: string, body: any) {
     const url = `${API_ROOT}/${endpoint}`;
-    return this.http.put(url, body);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.put(url, body, {headers}).pipe(
+      catchError((error) => {
+        return throwError(error); // Pass the error to the subscriber
+      })
+    );
   }
 }

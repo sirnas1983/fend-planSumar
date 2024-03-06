@@ -1,8 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable, InjectionToken } from "@angular/core";
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TokenService {
   constructor() {}
 
@@ -21,5 +23,15 @@ export class TokenService {
   getUsernameFromToken(): string {
     const token = localStorage.getItem('jwtToken');
     return 'username_here';
+  }
+
+  isAdmin(): boolean {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      const roles = decodedToken.roles || [];
+      return roles.includes("ADMIN");
+    }
+    return false;
   }
 }

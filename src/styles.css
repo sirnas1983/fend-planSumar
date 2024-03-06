@@ -1,3 +1,7 @@
+/* font awesome */
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+
 /* CSS PARA SNACKBAR */
 
 .snackbar-error {
@@ -36,13 +40,13 @@
 
 /* Cambio paleta de primary al color de plan sumar */
 
-.btn-primary{
+.btn-primary {
     background-color: rgb(0, 145, 230);
-    color:white;
-    border:none;
+    color: white;
+    border: none;
 }
 
-.primary{
+.primary {
     background-color: rgb(0, 145, 230);
 }
 
@@ -51,18 +55,23 @@
 .welcome-screen-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centrar verticalmente */
-    align-items: center; /* Centrar horizontalmente */
-    height: 100vh; /* Ocupar toda la altura de la pantalla */
+    justify-content: center;
+    /* Centrar verticalmente */
+    align-items: center;
+    /* Centrar horizontalmente */
+    height: 100vh;
+    /* Ocupar toda la altura de la pantalla */
     background-color: rgb(0, 145, 230);
     color: white;
     animation: fadeInOut 3.5s forwards;
 }
 
-.welcome-message, .username {
+.welcome-message,
+.username {
     opacity: 0;
     animation: fadeInOut 3.5s forwards;
-    text-align: center; /* Centrar el texto horizontalmente */
+    text-align: center;
+    /* Centrar el texto horizontalmente */
 }
 
 .welcome-title {
@@ -81,23 +90,100 @@
 
 @keyframes fadeInOut {
     0% {
-        opacity: 0; /* Start with opacity 0 */
+        opacity: 0;
+        /* Start with opacity 0 */
     }
-    50%{
+
+    50% {
         opacity: 1;
     }
+
     50% {
-        opacity: 1; /* Hold opacity for the next 2.2s */
+        opacity: 1;
+        /* Hold opacity for the next 2.2s */
     }
+
     100% {
-        opacity: 0; /* Fade out over the last 350ms */
+        opacity: 0;
+        /* Fade out over the last 350ms */
     }
 }
 
 /* logo en dashboard */
 
-.navbar .navbar-brand-wrapper .navbar-brand img{
+.navbar .navbar-brand-wrapper .navbar-brand img {
     padding: 0 !important;
     width: auto !important;
     height: 5rem !important;
+}
+
+/* iconos de seleccion en dashboard */
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    /* Espacio entre el título y los iconos */
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between; /* Distribuye el espacio entre los iconos */
+    flex-wrap: wrap; /* Permite que los iconos se envuelvan en varias filas */
+    gap: 20px; /* Espacio entre los iconos */
+}
+
+.icon {
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Alineación del texto */
+    width: calc(50% - 20px); /* Ancho del icono, reducido el espacio entre los iconos */
+}
+.icon:hover {
+
+    background-color: lightgray;
+    cursor:pointer ;
+    border-radius: 10px;
+
+}
+
+.icon i {
+    font-size: 4em; /* Tamaño del icono */
+    color:  rgb(0, 145, 230); /* Color principal de la app */
+}
+
+.icon span {
+    padding-top: 10px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 800;
+    color: rgb(83, 83, 83);
+    margin-top: auto; /* Alinear el texto en la parte inferior */
+}
+
+/* Button CSS for Efectores */
+
+.btn-action {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+}
+
+.btn-action:hover {
+    background-color: #d1d1d1;
+}
+
+.btn .mdi {
+    transform: translate(-20%, 0%);
+}
+
+.btn-action i {
+    margin: auto;
+    color: inherit;
+}
+
+.table.select-table td h6, .table.select-table td .h6 {
+    color:#474747 !important;
 }

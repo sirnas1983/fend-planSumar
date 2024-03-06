@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
+export class DashboardComponent implements OnInit {
+  username: String = '';
+  rol: string = '';
 
+  constructor(private authService: AuthService, private router : Router) {}
 
-export class DashboardComponent {
-username : String = '';
-rol : String = '';
+  ngOnInit(): void {
+    this.authService.userEmail$.subscribe(username => {
+      this.username = username;
+    });
 
-public constructor(private authService:  AuthService){ 
-  this.authService.userEmail$.subscribe(data =>{
-    this.username = data;
-    this.rol = this.authService.getUserRoles()[0];
-  })
-  
-}
+    this.authService.isAdmin$.subscribe(isAdmin => {
+      this.rol = isAdmin ? 'ADMIN' : 'USER';
+    });
+  }
 
+  isRouteActive(): boolean {
+    return this.router.url === '/dashboard';
+  }
 }
