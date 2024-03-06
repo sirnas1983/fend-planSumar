@@ -7,36 +7,35 @@
                         <div class="card card-rounded">
                             <div class="card-body">
                                 <!-- Aquí va el formulario -->
-                                <form (ngSubmit)="onSubmit()">
-                                    <h4 class="card-title">Editar Efector</h4>
+                                <form [formGroup]="efectorForm" (ngSubmit)="onSubmit()">                                    <h4 class="card-title">Editar Efector</h4>
                                     <!-- Campo ID -->
                                     <div class="form-group">
                                         <label for="id">ID</label>
-                                        <input type="text" class="form-control" id="id" [(ngModel)]="efector.id" name="id" disabled>
+                                        <input type="text" formControlDissabled="true" class="form-control" id="id" formControlName="id" name="id">
                                     </div>
                                     <!-- Campo Nombre -->
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" [(ngModel)]="efector.nombre" name="nombre">
+                                        <input type="text" class="form-control" id="nombre"  formControlName="nombre" name="nombre">
                                     </div>
                                     <!-- Campo CUIE -->
                                     <div class="form-group">
                                         <label for="cuie">CUIE</label>
-                                        <input type="text" class="form-control" id="cuie" [(ngModel)]="efector.cuie" name="cuie">
+                                        <input type="text" class="form-control" id="cuie" formControlName="cuie" name="cuie">
                                     </div>
                                     <!-- Campo Región -->
                                     <div class="form-group">
                                         <label for="region">Región</label>
-                                        <input type="text" class="form-control" id="region" [(ngModel)]="efector.region" name="region">
+                                        <input type="text" class="form-control" id="region" formControlName="region" name="region">
                                     </div>
                                     <!-- Campo Descripción -->
                                     <div class="form-group">
                                         <label for="descripcion">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" [(ngModel)]="efector.descripcion" name="descripcion"></textarea>
+                                        <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion" name="descripcion"></textarea>
                                     </div>
                                     <!-- Botones de enviar y restablecer -->
-                                    <button type="submit" class="btn btn-primary">Enviar</button>
-                                    <button type="button" class="btn btn-secondary" (click)="resetForm()">Restablecer</button>
+                                    <button type="submit" class="btn btn-primary" [disabled]="isLoading">Enviar</button>
+                                    <button type="button" class="btn btn-secondary" (click)="resetForm()" [disabled]="isLoading">Restablecer</button>
                                 </form>
                                 
                             </div>
