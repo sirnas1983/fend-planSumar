@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EfectorDataService } from '../../services/efector-data.service';
+import { EfectorDataService } from '../../../services/efector-data.service';
 
 @Component({
   selector: 'app-efector-detalle',

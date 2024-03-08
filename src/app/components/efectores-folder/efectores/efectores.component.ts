@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { Efector } from '../../interfaces/efector';
-import { AuthService } from '../../services/auth.service';
-import { EfectorDataService } from '../../services/efector-data.service';
+import { ApiService } from '../../../services/api.service';
+import { Efector } from '../../../interfaces/efector';
+import { AuthService } from '../../../services/auth.service';
+import { EfectorDataService } from '../../../services/efector-data.service';
 import { Router } from '@angular/router';
 
 @Component({

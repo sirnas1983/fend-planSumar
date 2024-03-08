@@ -1,0 +1,89 @@
+<div class="tab-content tab-content-basic">
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column">
+                <router-outlet></router-outlet>
+                <ng-container *ngIf="isRouteActive()">
+                    <div class="row flex-grow">
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card card-rounded">
+                                <div class="card-body">
+                                    <div class="d-sm-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h4 class="card-title card-title-dash">Lista de expedientes</h4>
+                                            <p class="card-subtitle card-subtitle-dash">Expedientes activos {{
+                                                expedientes.length || 0 }}</p>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <!-- BUSCAR Y AGREGAR ITEM -->
+                                            <div class="input-group me-3">
+                                                <span class="input-group-text"><i class="icon-search"></i></span>
+                                                <input type="search" class="form-control"
+                                                    placeholder="Ingrese aquí su búsqueda..."
+                                                    (input)="filtrarLista($event)">
+                                            </div>
+                                            <!-- FIN DE BUSQUEDA -->
+                                            <button
+                                                class="btn btn-primary btn-lg text-white mb-0 me-3 d-flex align-items-center"
+                                                (click)="agregarExpediente()">
+                                                <i class="mdi mdi-account-plus me-1"></i>
+                                                Agregar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive  mt-1">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Número</th>
+                                                    <th>CUIE<br>solicitante</th>
+                                                    <th>Titulo</th>
+                                                    <th>Fecha</th>
+                                                    <th>Monto Solicitado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngIf="isLoading">
+                                                    <td colspan="5">
+                                                        <div class="spinner-container">
+                                                            <div class="loader">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr *ngFor="let expediente of expedientes">
+                                                    <td>{{ expediente.numero }}</td>
+                                                    <td>{{ expediente.efector.cuie }}</td>
+                                                    <td>{{ expediente.nombre }}</td>
+                                                    <td>{{ expediente.fechaExpediente }}</td>
+                                                    <td>{{ expediente.montoSolicitado | currencyFormat }}</td>
+                                                    <td>
+                                                        <div class="btn-group me-3" role="group" aria-label="Acciones">
+                                                            <button
+                                                                class="btn btn-action btn-dark rounded-circle container"
+                                                                (click)="verExpediente(expediente)">
+                                                                <i class="fas fa-eye text-white"></i>
+                                                            </button>
+                                                            <ng-container *ngIf="isAdmin">
+                                                                <button
+                                                                    class="btn btn-action btn-primary rounded-circle container"
+                                                                    (click)="editarExpediente(expediente)">
+                                                                    <i class="fas fa-pencil-alt text-white"></i>
+                                                                </button>
+                                                            </ng-container>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

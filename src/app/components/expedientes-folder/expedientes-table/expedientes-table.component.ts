@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Efector } from '../../interfaces/efector';
-import { Expediente } from '../../interfaces/expediente';
-import { EfectorDataService } from '../../services/efector-data.service';
-import { ApiService } from '../../services/api.service';
-import { AuthService } from '../../services/auth.service';
+import { Efector } from '../../../interfaces/efector';
+import { Expediente } from '../../../interfaces/expediente';
+import { EfectorDataService } from '../../../services/efector-data.service';
+import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-expedientes-table',

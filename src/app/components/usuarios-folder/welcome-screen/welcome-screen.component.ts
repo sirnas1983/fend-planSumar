@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({

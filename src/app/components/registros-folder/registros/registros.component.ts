@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Registro } from '../../interfaces/registro';
-import { EfectorDataService } from '../../services/efector-data.service';
-import { ApiService } from '../../services/api.service';
-import { Efector } from '../../interfaces/efector';
+import { Registro } from '../../../interfaces/registro';
+import { EfectorDataService } from '../../../services/efector-data.service';
+import { ApiService } from '../../../services/api.service';
+import { Efector } from '../../../interfaces/efector';
 
 @Component({
   selector: 'app-registros',

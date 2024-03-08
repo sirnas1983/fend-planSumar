@@ -192,15 +192,24 @@
 .btn-action:hover {
     background-color: #d1d1d1;
 }
+/**/
 
-.btn .mdi {
-    transform: translate(-20%, 0%);
-}
+.container {
+    position: relative; /* Ensure positioning context for absolute positioning */
+  }
+  
+  i.fas:not(.grande) {
+    position: absolute; /* Position the icon relative to its container */
+    top: 50%; /* Move the icon 50% down from the top of the container */
+    left: 50%; /* Move the icon 50% from the left of the container */
+    transform: translate(-50%, -50%); /* Center the icon horizontally and vertically */
+  }
 
-.btn-action i {
+/**/
+/* .btn-action i {
     margin: auto;
     color: inherit;
-}
+} */
 
 .table.select-table td h6,
 .table.select-table td .h6 {

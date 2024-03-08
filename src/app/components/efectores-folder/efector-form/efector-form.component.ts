@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { EfectorDataService } from '../../services/efector-data.service';
-import { Efector } from '../../interfaces/efector';
-import { ApiService } from '../../services/api.service';
-import { ErrorHandlingService } from '../../services/error-handling.service';
+import { EfectorDataService } from '../../../services/efector-data.service';
+import { Efector } from '../../../interfaces/efector';
+import { ApiService } from '../../../services/api.service';
+import { ErrorHandlingService } from '../../../services/error-handling.service';
 import { Location } from '@angular/common'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Regiones } from '../../interfaces/regions';
+import { Regiones } from '../../../interfaces/regions';
 
 @Component({
   selector: 'app-efector-form',

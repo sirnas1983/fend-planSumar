@@ -12,9 +12,6 @@
             <table class="table table-stripped ">
                 <thead>
                     <tr>
-                        <ng-container *ngIf="isAdmin">
-                            <th></th>
-                        </ng-container>
                         <th>Número</th>
                         <th>Titulo</th>
                         <th>Fecha</th>
@@ -26,14 +23,6 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let expediente of expedientes">
-                        <ng-container *ngIf="isAdmin">
-                            <td>
-                                <button class="btn btn-action btn-success rounded-circle d-flex align-items-center"
-                                    (click)="editarExpediente(expediente)">
-                                    <i class="mdi mdi-pencil text-white"></i>
-                                </button>
-                            </td>
-                        </ng-container>
                         <td>{{ expediente.numero }}</td>
                         <td>{{ expediente.nombre }}</td>
                         <td>{{ expediente.fechaExpediente }}</td>

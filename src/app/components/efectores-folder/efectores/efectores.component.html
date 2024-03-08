@@ -39,8 +39,8 @@
                                                     <th>CUIE</th>
                                                     <th>Nombre</th>
                                                     <th>Region</th>
-                                                    <th>Montos solicitados<br>(x $100.000)</th>
-                                                    <th>Edicion<br>(solo administradores)</th>
+                                                    <th>Montos solicitados<br>(x 10)^5</th>
+                                                    <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -94,39 +94,22 @@
                                                             </div>
                                                         </td>
                                                         <td>
-
-                                                            <div class="btn-group me-3" role="group"
-                                                                aria-label="Acciones">
-
+                                                            <div class="btn-group me-3" role="group" aria-label="Acciones">
                                                                 <!-- Botón de ver detalle -->
-                                                                <button
-                                                                    class="btn btn-action btn-info rounded-circle d-flex align-items-center"
+                                                                <button class="btn btn-action btn-dark rounded-circle container"
                                                                     (click)="verEfector(efector)">
-                                                                    <i class="mdi mdi-eye-outline text-white"></i>
+                                                                    <i class="fas fa-eye text-white"></i>
                                                                 </button>
-
                                                                 <!-- Botones de acción (mostrados solo para administradores) -->
                                                                 <ng-container *ngIf="isAdmin">
-                                                                    <button
-                                                                        class="btn btn-action btn-primary rounded-circle d-flex align-items-center"
+                                                                    <button class="btn btn-action btn-primary rounded-circle container"
                                                                         (click)="editarEfector(efector)">
-                                                                        <i class="mdi mdi-pencil text-white"></i>
+                                                                        <i class="fas fa-pencil-alt text-white"></i>
                                                                     </button>
-                                                                    <button
-                                                                        class="btn btn-action btn-success rounded-circle d-flex align-items-center"
+                                                                    <button class="btn btn-action btn-info rounded-circle container"
                                                                         (click)="agregarRegistro(efector)">
-                                                                        <i class="mdi mdi-currency-usd text-white"></i>
+                                                                        <i class="fas fa-dollar-sign text-white"></i>
                                                                     </button>
-                                                                    <!-- <button
-                                                                        class="btn btn-action btn-danger rounded-circle d-flex align-items-center"
-                                                                        (click)="inhabilitarEfector(efector)">
-                                                                        <i class="mdi mdi-block-helper text-white"></i>
-                                                                    </button>
-                                                                    <button
-                                                                        class="btn btn-action btn-warning rounded-circle d-flex align-items-center"
-                                                                        (click)="agregarExpediente(efector)">
-                                                                        <i class="mdi mdi-file-plus text-white"></i>
-                                                                    </button> -->
                                                                 </ng-container>
                                                             </div>
                                                         </td>
@@ -134,7 +117,6 @@
                                                 </ng-container>
                                             </tbody>
                                         </table>
-                                        <!-- <app-pagination [totalItems]="totalItems" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination> -->
                                     </div>
                                 </div>
                             </div>
