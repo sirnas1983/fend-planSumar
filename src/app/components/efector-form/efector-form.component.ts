@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { EfectorDataService } from '../../services/efector-data.service';
-import { EfectorDTO } from '../../interfaces/efector';
+import { Efector } from '../../interfaces/efector';
 import { ApiService } from '../../services/api.service';
 import { ErrorHandlingService } from '../../services/error-handling.service';
 import { Location } from '@angular/common'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Regiones } from '../../interfaces/regions';
 
 @Component({
   selector: 'app-efector-form',
@@ -15,10 +16,11 @@ import { Subscription } from 'rxjs';
 export class EfectorFormComponent {
 
   endpoint: string = 'efectores';
-  efector!: EfectorDTO;
+  efector!: Efector;
   isLoading: boolean = false;
   efectorForm: FormGroup;
   efectorDataSubscription: Subscription | undefined;
+  regions = Object.values(Regiones);
 
 
   constructor(
@@ -40,11 +42,12 @@ export class EfectorFormComponent {
         fechaCreacion: [''],
         fechaModificacion: ['']
       }),
-      totalHaber: [0, Validators.required],
-      totalDebe: [0, Validators.required],
-      saldo: [0, Validators.required],
+      totalHaber: [0],
+      totalDebe: [0],
+      saldo: [0],
       descripcion: ['']
     });
+
     this.efectorForm.get('id')?.disable();
     this.efectorDataSubscription = this.efectorData.currentEfector.subscribe(data => {
       console.log(data);
@@ -78,7 +81,7 @@ export class EfectorFormComponent {
               console.log("error: ", error);
               this.errorHandlingService.handleHttpError(error);
               this.isLoading = false;
-              this.location.back();
+
             }
           )
       } else {
@@ -93,7 +96,7 @@ export class EfectorFormComponent {
               // Handle error
               this.errorHandlingService.handleHttpError(error);
               this.isLoading = false;
-              this.location.back();
+
             }
           );
       }
@@ -101,6 +104,6 @@ export class EfectorFormComponent {
   }
 
   resetForm() {
-    // Logic to reset the form
+    this.efectorForm.reset();
   }
 }

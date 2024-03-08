@@ -1,3 +1,4 @@
+<app-welcome-screen *ngIf="isLoading"></app-welcome-screen>
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0 py-0">
@@ -19,7 +20,7 @@
                     placeholder="Password" name="password" [(ngModel)]="password">             
                 </div>
                 <div class="mt-3">
-                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">INICIAR SESIÓN</button>
+                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" [disabled]="isLoading">INICIAR SESIÓN</button>
                 </div>
                 <div class="my-2 align-items-center">
                     <!-- <div class="form-check">

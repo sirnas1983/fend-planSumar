@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { EfectorDTO } from '../../interfaces/efector';
+import { Efector } from '../../interfaces/efector';
 import { AuthService } from '../../services/auth.service';
 import { EfectorDataService } from '../../services/efector-data.service';
 import { Router } from '@angular/router';
@@ -13,27 +13,35 @@ import { Router } from '@angular/router';
 export class EfectoresComponent implements OnInit {
 
   cantEfectores: number = 0;
-  efectoresOriginal: EfectorDTO[] = [];
-  efectores: EfectorDTO[] = [];
+  efectoresOriginal: Efector[] = [];
+  efectores: Efector[] = [];
   isAdmin: Boolean = false;
+  isLoading: boolean = false;
+
+  // paginacion
+  currentPage: number = 0;
+  pageSize: number = 20;
+  totalItems: number = 0;
 
   private endpoint: string = 'efectores';
 
   constructor(private apiService: ApiService, private router: Router, private authService: AuthService, private efectorData: EfectorDataService) { }
 
   ngOnInit(): void {
-
-    this.apiService.fetchData(this.endpoint).subscribe((data: any) => {
-      console.log(data);
-      this.efectoresOriginal = data;
-      this.cantEfectores = data.length;
-      this.efectores = this.efectoresOriginal; 
-
-    })
     this.authService.isAdmin$.subscribe((data: boolean) => {
       this.isAdmin = data;
     })
+    this.fetchData();
+  }
 
+  fetchData(): void {
+    this.isLoading = true;
+    this.apiService.fetchData(this.endpoint).subscribe((data: any) => {
+      data = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
+      this.efectoresOriginal = data;
+      this.efectores = data;
+      this.isLoading = false;
+    });
   }
 
   isRouteActive(): boolean {
@@ -49,28 +57,33 @@ export class EfectoresComponent implements OnInit {
     );
   }
 
-  editarEfector(efector: EfectorDTO) {
+  verEfector(efector: Efector) {
+    this.efectorData.changeEfector(efector);
+    this.router.navigateByUrl('/dashboard/efectores/detalle');
+  }
+
+  editarEfector(efector: Efector) {
     this.efectorData.changeEfector(efector);
     this.router.navigateByUrl('/dashboard/efectores/modificar');
   }
 
-  agregarRegistro(efector: EfectorDTO) {
-    // Aquí puedes implementar la lógica para agregar un registro al efector
+  agregarRegistro(efector: Efector) {
+
     console.log('Agregar registro:', efector);
   }
 
-  inhabilitarEfector(efector: EfectorDTO) {
+  inhabilitarEfector(efector: Efector) {
     // Aquí puedes implementar la lógica para inhabilitar el efector
     console.log('Inhabilitar efector:', efector);
   }
 
-  agregarExpediente(efector: EfectorDTO) {
+  agregarExpediente(efector: Efector) {
     this.efectorData.changeEfector(efector);
     console.log('Agregar expediente:', efector);
   }
 
   agregarEfector() {
-    const efector: EfectorDTO = {
+    const efector: Efector = {
       id: '',
       nombre: '',
       cuie: '',
@@ -88,7 +101,6 @@ export class EfectoresComponent implements OnInit {
       descripcion: ''
     }
     this.efectorData.changeEfector(efector);
-    console.log('agregar Efector');
+    this.router.navigateByUrl('/dashboard/efectores/modificar');
   }
-
 }

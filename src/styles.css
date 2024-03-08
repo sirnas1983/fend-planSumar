@@ -53,16 +53,20 @@
 /* CSS PARA NOMBRE WELCOME PAGE */
 
 .welcome-screen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 145, 230);
+    color: whitesmoke;
+    /* Color principal de la app */
+    z-index: 9999;
+    /* Para que esté por encima de otros elementos */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Centrar verticalmente */
     align-items: center;
-    /* Centrar horizontalmente */
-    height: 100vh;
-    /* Ocupar toda la altura de la pantalla */
-    background-color: rgb(0, 145, 230);
-    color: white;
     animation: fadeInOut 3.5s forwards;
 }
 
@@ -91,20 +95,25 @@
 @keyframes fadeInOut {
     0% {
         opacity: 0;
+        z-index: 9999;
         /* Start with opacity 0 */
     }
 
     50% {
         opacity: 1;
+        z-index: 9999;
+        /* Hold opacity for the next 2.2s */
     }
 
-    50% {
+    80% {
         opacity: 1;
+        z-index: 9999;
         /* Hold opacity for the next 2.2s */
     }
 
     100% {
         opacity: 0;
+        z-index: 9999;
         /* Fade out over the last 350ms */
     }
 }
@@ -129,9 +138,12 @@
 
 .icons {
     display: flex;
-    justify-content: space-between; /* Distribuye el espacio entre los iconos */
-    flex-wrap: wrap; /* Permite que los iconos se envuelvan en varias filas */
-    gap: 20px; /* Espacio entre los iconos */
+    justify-content: space-between;
+    /* Distribuye el espacio entre los iconos */
+    flex-wrap: wrap;
+    /* Permite que los iconos se envuelvan en varias filas */
+    gap: 20px;
+    /* Espacio entre los iconos */
 }
 
 .icon {
@@ -139,28 +151,34 @@
     padding: 30px;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Alineación del texto */
-    width: calc(50% - 20px); /* Ancho del icono, reducido el espacio entre los iconos */
+    text-align: center;
+    /* Alineación del texto */
+    width: calc(50% - 20px);
+    /* Ancho del icono, reducido el espacio entre los iconos */
 }
+
 .icon:hover {
 
     background-color: lightgray;
-    cursor:pointer ;
+    cursor: pointer;
     border-radius: 10px;
 
 }
 
 .icon i {
-    font-size: 4em; /* Tamaño del icono */
-    color:  rgb(0, 145, 230); /* Color principal de la app */
+    font-size: 4em;
+    /* Tamaño del icono */
+    color: rgb(0, 145, 230);
+    /* Color principal de la app */
 }
 
 .icon span {
     padding-top: 10px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 800;
     color: rgb(83, 83, 83);
-    margin-top: auto; /* Alinear el texto en la parte inferior */
+    margin-top: auto;
+    /* Alinear el texto en la parte inferior */
 }
 
 /* Button CSS for Efectores */
@@ -184,6 +202,65 @@
     color: inherit;
 }
 
-.table.select-table td h6, .table.select-table td .h6 {
-    color:#474747 !important;
+.table.select-table td h6,
+.table.select-table td .h6 {
+    color: #474747 !important;
+}
+
+/* Estilos para paginacion*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-link {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.page-link.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* LOADER CSS */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* mensaje de error en formulario CSS*/
+
+.error-message {
+    color: rgb(154, 59, 59);
+    font-size: smaller;
+    font-weight: 800;
+}
+
+/* FORMATO PARA BOTONES DE NAVEGACION */
+.button-text {
+    color: #fff;
+    font-weight: 800;
+}
+
+.table-footer {
+    border-top: 3px solid #dee2e6; /* Puedes ajustar el color y el estilo según tus preferencias */
 }

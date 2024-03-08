@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Registros Contables</h4>
+            <button class="btn btn-primary btn-lg text-white mb-0 me-3 d-flex align-items-center"
+                (click)="agregarRegistro()">
+                <i class="mdi mdi-plus me-1"></i>
+                Agregar
+            </button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Detalle</th>
+                    <th>Haber</th>
+                    <th>Debe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let registro of registros">
+
+                    <td>{{ registro.fecha }}</td>
+                    <td>{{ registro.detalle }}</td>
+                    <td *ngIf="registro.tipoRegistro === 'HABER'">{{ registro.monto | currencyFormat }}</td>
+                    <td *ngIf="registro.tipoRegistro === 'DEBE'"></td>
+                    <td *ngIf="registro.tipoRegistro === 'DEBE'">{{ registro.monto | currencyFormat }}</td>
+                    <td *ngIf="registro.tipoRegistro === 'HABER'"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="table-footer">
+                    <td></td>
+                    <td><b>Suma de totales: </b></td>
+                    <td>{{ efector.totalHaber | currencyFormat }}</td>
+                    <td>{{ efector.totalDebe | currencyFormat }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

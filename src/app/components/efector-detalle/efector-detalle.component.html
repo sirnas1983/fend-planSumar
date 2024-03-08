@@ -1,0 +1,83 @@
+<div class="tab-content tab-content-basic">
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-header">
+                                <h5 class="card-title">{{ currentEfector.nombre }} - {{ currentEfector.cuie }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Detalles del efector -->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <p><strong>Región:</strong> {{ currentEfector.region }}</p>
+                                        <p><strong>Descripción:</strong> {{ currentEfector.descripcion }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Total Haber:</strong> {{ currentEfector.totalHaber | currencyFormat
+                                            }}</p>
+                                        <p><strong>Total Debe:</strong> {{ currentEfector.totalDebe | currencyFormat }}
+                                        </p>
+                                        <p><strong>Saldo:</strong> {{ currentEfector.saldo | currencyFormat }}</p>
+
+                                        <!-- Detalles del auditor -->
+                                        <p><strong>Fecha de Creación:</strong> {{
+                                            currentEfector.auditorDTO.fechaCreacion }}</p>
+                                        <p><strong>Creado Por:</strong> {{ currentEfector.auditorDTO.creadoPor }}</p>
+                                        <p><strong>Fecha de Modificación:</strong> {{
+                                            currentEfector.auditorDTO.fechaModificacion }}</p>
+                                        <p><strong>Modificado Por:</strong> {{ currentEfector.auditorDTO.modificadoPor
+                                            }}</p>
+                                    </div>
+                                </div>
+                                <!-- Fin de Detalles del efector -->
+
+                                <!-- Botones -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info d-flex align-items-center primary"
+                                            (click)="toggleRegistros()">
+                                            <i class="mdi mdi-file-document-outline text-white"></i>
+                                            <span class="button-text">{{ showRegistros ? 'Ocultar registros' : 'Ver
+                                                registros' }}</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info d-flex align-items-center primary"
+                                            (click)="toggleExpedientes()">
+                                            <i class="mdi mdi-file-search-outline text-white"></i>
+                                            <span class="button-text">{{ showExpedientes ? 'Ocultar expedientes' : 'Ver
+                                                expedientes' }}</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-info d-flex align-items-center primary"
+                                            (click)="toggleResoluciones()">
+                                            <i class="mdi mdi-file-document-multiple-outline text-white"></i>
+                                            <span class="button-text">{{ showResoluciones ? 'Ocultar resoluciones' :
+                                                'Ver resoluciones' }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Fin de Botones -->
+                                <div *ngIf="showRegistros">
+                                    <app-registros></app-registros>
+                                  </div>
+                                  
+                                  <div *ngIf="showExpedientes">
+                                    <app-expedientes-table></app-expedientes-table>
+                                  </div>
+                                  
+                                  <div *ngIf="showResoluciones">
+                                    <app-resoluciones></app-resoluciones>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,18 @@ import { ExpedientesComponent } from './components/expedientes/expedientes.compo
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { EfectorFormComponent } from './components/efector-form/efector-form.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { MatInputModule } from '@angular/material/input'
+import { EfectorDetalleComponent } from './components/efector-detalle/efector-detalle.component';
+import { CurrencyFormatPipe } from './pipes/currency-format.pipe';
+import { DecimalPipe } from '@angular/common';
 
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { RegistrosComponent } from './components/registros/registros.component';
+import { ExpedientesTableComponent } from './components/expedientes-table/expedientes-table.component';
+registerLocaleData(localeEs);
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +39,12 @@ import { EfectorFormComponent } from './components/efector-form/efector-form.com
     ExpedientesComponent,
     UsuariosComponent,
     EfectorFormComponent,    
+    PaginationComponent,
+    EfectorDetalleComponent,
+    CurrencyFormatPipe,
+    RegistrosComponent,
+    ExpedientesTableComponent,
+    
 
   ],
   imports: [
@@ -38,10 +55,13 @@ import { EfectorFormComponent } from './components/efector-form/efector-form.com
     MatSnackBarModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    
+    NgxPaginationModule,
+    MatInputModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    DecimalPipe,
+   
   ],
   bootstrap: [AppComponent]
 })

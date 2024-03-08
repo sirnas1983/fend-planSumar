@@ -20,9 +20,8 @@ export class WelcomeScreenComponent {
     console.log("Component view initialized");
     this.authService.userEmail$.subscribe((data: String) => {
       this.username = data;
-    }); // Assuming you have a method to get the username from AuthService
-    setTimeout(() => {
-      this.router.navigate(['/dashboard']); // Redirect to the main app after 3.5 seconds
-    }, 3500);
+    }); 
   }
+
+
 }

@@ -1,11 +1,11 @@
-import { AuditorDTO } from "./auditor";
+import { Auditor } from "./auditor";
 
-export interface EfectorDTO {
+export interface Efector {
     id: string;
     nombre: string;
     cuie: string;
     region: string;
-    auditorDTO: AuditorDTO;
+    auditorDTO: Auditor;
     totalHaber: number;
     totalDebe: number;
     saldo: number;

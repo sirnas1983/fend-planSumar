@@ -10,10 +10,10 @@ import { ResolucionesComponent } from './components/resoluciones/resoluciones.co
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { AdminGuard } from './guards/admin.guard';
 import { EfectorFormComponent } from './components/efector-form/efector-form.component';
+import { EfectorDetalleComponent } from './components/efector-detalle/efector-detalle.component';
 
 
 const routes: Routes = [
-  { path: 'welcome', component: WelcomeScreenComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
@@ -21,7 +21,8 @@ const routes: Routes = [
         path: 'efectores', component: EfectoresComponent, children:
           [
             { path: 'crear', component: EfectorFormComponent },
-            { path: 'modificar', component: EfectorFormComponent }
+            { path: 'modificar', component: EfectorFormComponent },
+            { path: 'detalle', component: EfectorDetalleComponent }
           ]
       },
       { path: 'expedientes', component: ExpedientesComponent },

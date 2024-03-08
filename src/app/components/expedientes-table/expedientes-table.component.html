@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Expedientes</h4>
+            <button class="btn btn-primary btn-lg text-white mb-0 me-3 d-flex align-items-center"
+                (click)="agregarExpediente()">
+                <i class="mdi mdi-plus me-1"></i>
+                Agregar
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-stripped ">
+                <thead>
+                    <tr>
+                        <ng-container *ngIf="isAdmin">
+                            <th></th>
+                        </ng-container>
+                        <th>Número</th>
+                        <th>Titulo</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Monto Solicitado</th>
+                        <th>Cargado el</th>
+                        <th>Por</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let expediente of expedientes">
+                        <ng-container *ngIf="isAdmin">
+                            <td>
+                                <button class="btn btn-action btn-success rounded-circle d-flex align-items-center"
+                                    (click)="editarExpediente(expediente)">
+                                    <i class="mdi mdi-pencil text-white"></i>
+                                </button>
+                            </td>
+                        </ng-container>
+                        <td>{{ expediente.numero }}</td>
+                        <td>{{ expediente.nombre }}</td>
+                        <td>{{ expediente.fechaExpediente }}</td>
+                        <td>{{ expediente.descripcion }}</td>
+                        <td>{{ expediente.montoSolicitado | currencyFormat }}</td>
+                        <td>{{ expediente.auditorDTO.fechaCreacion }}</td>
+                        <td>{{ expediente.auditorDTO.creadoPor }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

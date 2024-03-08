@@ -7,37 +7,62 @@
                         <div class="card card-rounded">
                             <div class="card-body">
                                 <!-- Aquí va el formulario -->
-                                <form [formGroup]="efectorForm" (ngSubmit)="onSubmit()">                                    <h4 class="card-title">Editar Efector</h4>
+                                <form [formGroup]="efectorForm" (ngSubmit)="onSubmit()">
+                                    <h4 class="card-title">Editar Efector</h4>
                                     <!-- Campo ID -->
                                     <div class="form-group">
                                         <label for="id">ID</label>
-                                        <input type="text" formControlDissabled="true" class="form-control" id="id" formControlName="id" name="id">
+                                        <input type="text" formControlName="id" class="form-control" id="id" name="id"
+                                            readonly>
                                     </div>
                                     <!-- Campo Nombre -->
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre"  formControlName="nombre" name="nombre">
+                                        <input type="text" formControlName="nombre" class="form-control" id="nombre"
+                                            name="nombre">
+                                        <mat-error *ngIf="efectorForm.get('nombre')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
                                     </div>
                                     <!-- Campo CUIE -->
                                     <div class="form-group">
                                         <label for="cuie">CUIE</label>
-                                        <input type="text" class="form-control" id="cuie" formControlName="cuie" name="cuie">
+                                        <input type="text" formControlName="cuie" class="form-control" id="cuie"
+                                            name="cuie">
+                                        <mat-error *ngIf="efectorForm.get('cuie')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
                                     </div>
                                     <!-- Campo Región -->
                                     <div class="form-group">
                                         <label for="region">Región</label>
-                                        <input type="text" class="form-control" id="region" formControlName="region" name="region">
+                                        <select formControlName="region" class="form-control" id="region" name="region">
+                                            <option *ngFor="let value of regions" [value]="value">{{
+                                                value }}</option>
+                                        </select>
+                                        <mat-error *ngIf="efectorForm.get('region')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
                                     </div>
                                     <!-- Campo Descripción -->
                                     <div class="form-group">
                                         <label for="descripcion">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion" name="descripcion"></textarea>
+                                        <textarea formControlName="descripcion" class="form-control" id="descripcion"
+                                            rows="3" name="descripcion"></textarea>
+                                        <mat-error *ngIf="efectorForm.get('descripcion')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
                                     </div>
                                     <!-- Botones de enviar y restablecer -->
-                                    <button type="submit" class="btn btn-primary" [disabled]="isLoading">Enviar</button>
-                                    <button type="button" class="btn btn-secondary" (click)="resetForm()" [disabled]="isLoading">Restablecer</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        [disabled]="efectorForm.invalid || isLoading">Enviar</button>
+                                    <button type="button" class="btn btn-secondary" (click)="resetForm()"
+                                        [disabled]="isLoading">Restablecer</button>
                                 </form>
-                                
                             </div>
                         </div>
                     </div>
