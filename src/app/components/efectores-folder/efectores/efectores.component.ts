@@ -39,6 +39,7 @@ export class EfectoresComponent implements OnInit {
     this.apiService.fetchData(this.endpoint).subscribe((data: any) => {
       data = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
       this.efectoresOriginal = data;
+      this.efectorData.changeListaEfectores(data);
       this.efectores = data;
       this.isLoading = false;
     });

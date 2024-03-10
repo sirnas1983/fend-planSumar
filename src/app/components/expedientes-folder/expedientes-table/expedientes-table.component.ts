@@ -4,6 +4,8 @@ import { Expediente } from '../../../interfaces/expediente';
 import { EfectorDataService } from '../../../services/efector-data.service';
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
+import { ExpedienteDataService } from '../../../services/expediente-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expedientes-table',
@@ -17,7 +19,11 @@ export class ExpedientesTableComponent {
   cuie: string = '';
   isAdmin : boolean = false;
 
-  constructor(private efectorData: EfectorDataService, private apiService: ApiService, private authService : AuthService) {
+  constructor(private efectorData: EfectorDataService, 
+    private apiService: ApiService, 
+    private authService : AuthService, 
+    private expedienteData : ExpedienteDataService,
+    private router : Router) {
     this.efectorData.currentEfector.subscribe(data => {
       this.cuie = data.cuie;
       this.efector = data;
@@ -39,7 +45,15 @@ export class ExpedientesTableComponent {
     return null;
   }
 
-  editarExpediente(expediente : Expediente){
-    console.log(expediente);
+ 
+  verExpediente(expediente : Expediente){
+    this.expedienteData.changeExpediente(expediente);
+    this.router.navigateByUrl('/dashboard/expedientes/detalle')
   }
+
+  editarExpediente(expediente : Expediente){
+    this.expedienteData.changeExpediente(expediente);
+    this.router.navigateByUrl('/dashboard/expedientes/modificar')
+  }
+
 }

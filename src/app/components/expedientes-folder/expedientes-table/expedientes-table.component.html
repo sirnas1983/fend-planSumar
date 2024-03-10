@@ -19,6 +19,8 @@
                         <th>Monto Solicitado</th>
                         <th>Cargado el</th>
                         <th>Por</th>
+                        <th>Acciones</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -30,6 +32,21 @@
                         <td>{{ expediente.montoSolicitado | currencyFormat }}</td>
                         <td>{{ expediente.auditorDTO.fechaCreacion }}</td>
                         <td>{{ expediente.auditorDTO.creadoPor }}</td>
+                        <td>
+                            <div class="btn-group me-3" role="group" aria-label="Acciones">
+                                <!-- Botón de ver detalle -->
+                                <button class="btn btn-action btn-dark rounded-circle container"
+                                    (click)="verExpediente(expediente)">
+                                    <i class="fas fa-eye text-white"></i>
+                                </button>
+                                <ng-container *ngIf="isAdmin">
+                                    <button class="btn btn-action btn-primary rounded-circle container"
+                                        (click)="editarExpediente(expediente)">
+                                        <i class="fas fa-pencil-alt text-white"></i>
+                                    </button>
+                                </ng-container>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

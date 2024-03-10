@@ -27,6 +27,7 @@ import localeEs from '@angular/common/locales/es';
 import { RegistrosComponent } from './components/registros-folder/registros/registros.component';
 import { ExpedientesTableComponent } from './components/expedientes-folder/expedientes-table/expedientes-table.component';
 import { ExpedienteDetalleComponent } from './components/expedientes-folder/expediente-detalle/expediente-detalle.component';
+import { ExpedienteFormComponent } from './components/expedientes-folder/expediente-form/expediente-form.component';
 registerLocaleData(localeEs);
 @NgModule({
   declarations: [
@@ -48,8 +49,9 @@ registerLocaleData(localeEs);
     ExpedientesComponent,
     ExpedientesTableComponent,
     ExpedienteDetalleComponent,
+    ExpedienteFormComponent,
 
-    CurrencyFormatPipe,
+    CurrencyFormatPipe
   ],
   imports: [
     BrowserModule,

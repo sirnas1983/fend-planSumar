@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-lg-12 d-flex flex-column">
+        <div class="row flex-grow">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card card-rounded">
+                    <div class="card-body">
+                        <!-- Aquí va el formulario -->
+                        <form [formGroup]="expedienteForm" (ngSubmit)="onSubmit()">
+                            <h4 class="card-title">Editar Expediente</h4>
+                            <!-- Campo ID -->
+                            <div class="form-group">
+                                <label for="id">ID</label>
+                                <input type="text" formControlName="id" class="form-control" id="id" name="id" readonly>
+                            </div>
+                            <!-- Campo Nombre -->
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" formControlName="nombre" class="form-control" id="nombre"
+                                    name="nombre" required>
+                                <mat-error *ngIf="expedienteForm.get('nombre')?.hasError('required')"
+                                    class="error-message">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </div>
+                            <!-- Campo Numero -->
+                            <div class="form-group">
+                                <label for="numero">Número</label>
+                                <input type="text" formControlName="numero" class="form-control" id="numero"
+                                    name="numero" required>
+                                <mat-error *ngIf="expedienteForm.get('numero')?.hasError('required')"
+                                    class="error-message">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </div>
+                            <!-- Campo Efector -->
+                            <div class="form-group">
+                                <label for="efector">Efector</label>
+                                <select formControlName="efector" class="form-control" id="efector" name="efector"
+                                    required>
+                                    <option *ngFor="let efector of efectores" [value]="efector">{{ efector.cuie }} - {{efector.nombre}}
+                                    </option>
+                                </select>
+                                <mat-error *ngIf="expedienteForm.get('efector')?.hasError('required')"
+                                    class="error-message">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </div>
+                            <!-- Campo Monto Solicitado -->
+                            <div class="form-group">
+                                <label for="montoSolicitado">Monto Solicitado</label>
+                                <input type="number" formControlName="montoSolicitado" class="form-control"
+                                    id="montoSolicitado" name="montoSolicitado" required>
+                                <mat-error *ngIf="expedienteForm.get('montoSolicitado')?.hasError('required')"
+                                    class="error-message">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </div>
+                            <!-- Campo Fecha Expediente -->
+                            <div class="form-group">
+                                <label for="fechaExpediente">Fecha Expediente</label>
+                                <input type="date" formControlName="fechaExpediente" class="form-control"
+                                    id="fechaExpediente" name="fechaExpediente" required>
+                                <mat-error *ngIf="expedienteForm.get('fechaExpediente')?.hasError('required')"
+                                    class="error-message">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </div>
+                            <!-- Campo Descripción -->
+                            <div class="form-group">
+                                <label for="descripcion">Descripción</label>
+                                <textarea formControlName="descripcion" class="form-control" id="descripcion" rows="3"
+                                    name="descripcion"></textarea>
+                            </div>
+                            <!-- Botones de enviar y restablecer -->
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="expedienteForm.invalid || isLoading">Enviar</button>
+                            <button type="button" class="btn btn-secondary" (click)="resetForm()"
+                                [disabled]="isLoading">Restablecer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

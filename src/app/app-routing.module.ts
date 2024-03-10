@@ -12,31 +12,34 @@ import { AdminGuard } from './guards/admin.guard';
 import { EfectorFormComponent } from './components/efectores-folder/efector-form/efector-form.component';
 import { EfectorDetalleComponent } from './components/efectores-folder/efector-detalle/efector-detalle.component';
 import { ExpedienteDetalleComponent } from './components/expedientes-folder/expediente-detalle/expediente-detalle.component';
+import { ExpedienteFormComponent } from './components/expedientes-folder/expediente-form/expediente-form.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, title: "inicioSesion", data: { title: 'Inicio de sesión' } },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
       {
         path: 'efectores', component: EfectoresComponent, children:
           [
-            { path: 'crear', component: EfectorFormComponent },
-            { path: 'modificar', component: EfectorFormComponent },
-            { path: 'detalle', component: EfectorDetalleComponent }
+            { path: 'crear', component: EfectorFormComponent, canActivate: [AdminGuard], data: { title: 'Crear Efector' } },
+            { path: 'modificar', component: EfectorFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Efector' } },
+            { path: 'detalle', component: EfectorDetalleComponent, data: { title: 'Detalle de Efector' } }
           ]
       },
       {
         path: 'expedientes', component: ExpedientesComponent, children:
           [
-            { path: 'detalle', component: ExpedienteDetalleComponent },
+            { path: 'crear', component: ExpedienteFormComponent, canActivate: [AdminGuard], data: { title: 'Crear Expediente' } },
+            { path: 'detalle', component: ExpedienteDetalleComponent, data: { title: 'Detalle de Expediente' } },
+            { path: 'modificar', component: ExpedienteFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Expediente' } },
           ]
       },
-      { path: 'resoluciones', component: ResolucionesComponent },
-      { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard] },
+      { path: 'resoluciones', component: ResolucionesComponent, data: { title: 'Resoluciones' } },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard], data: { title: 'Usuarios' } },
     ]
   },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full', data: { title: 'Inicio de sesión' } },
 ];
 
 @NgModule({
@@ -44,4 +47,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 

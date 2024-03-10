@@ -3,6 +3,8 @@ import { ExpedienteDataService } from '../../../services/expediente-data.service
 import { ApiService } from '../../../services/api.service';
 import { API_ROOT } from '../../../constants/constants';
 import { Resolucion } from '../../../interfaces/resolucion';
+import { Expediente } from '../../../interfaces/expediente';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-expediente-detalle',
@@ -18,7 +20,7 @@ export class ExpedienteDetalleComponent implements OnInit {
   resolucion!: Resolucion;
   hasExpediente: boolean = false;
 
-  constructor(private expedienteService: ExpedienteDataService, private apiService: ApiService) { }
+  constructor(private expedienteService: ExpedienteDataService, private apiService: ApiService, private router:Router) { }
 
   ngOnInit(): void {
     // Suscripción al observable currentExpediente
@@ -43,6 +45,10 @@ export class ExpedienteDetalleComponent implements OnInit {
     this.showResoluciones = !this.showResoluciones;
     this.showRegistros = false;
     this.showExpedientes = false;
+  }
+
+  editarExpediente(currentExpediente:Expediente){
+    this.router.navigateByUrl('/dashboard/expedientes/modificar');
   }
 
   loadResolucion(): void {

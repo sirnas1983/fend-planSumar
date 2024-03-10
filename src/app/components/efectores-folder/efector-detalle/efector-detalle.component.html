@@ -5,8 +5,12 @@
                 <div class="row flex-grow">
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card card-rounded">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">{{ currentEfector.nombre }} - {{ currentEfector.cuie }}</h5>
+                                <button class="btn btn-action btn-primary rounded-circle container"
+                                    (click)="editarEfector(currentEfector)">
+                                    <i class="fas fa-pencil-alt text-white"></i>
+                                </button>
                             </div>
                             <div class="card-body">
                                 <!-- Detalles del efector -->
@@ -64,15 +68,15 @@
                                 <!-- Fin de Botones -->
                                 <div *ngIf="showRegistros">
                                     <app-registros></app-registros>
-                                  </div>
-                                  
-                                  <div *ngIf="showExpedientes">
+                                </div>
+
+                                <div *ngIf="showExpedientes">
                                     <app-expedientes-table></app-expedientes-table>
-                                  </div>
-                                  
-                                  <div *ngIf="showResoluciones">
+                                </div>
+
+                                <div *ngIf="showResoluciones">
                                     <app-resoluciones></app-resoluciones>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>

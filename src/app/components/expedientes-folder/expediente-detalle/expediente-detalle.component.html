@@ -5,9 +5,12 @@
                 <div class="row flex-grow">
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card card-rounded">
-                            <div class="card-header">
-                                <h5 class="card-title">{{ currentExpediente.numero }} - {{ currentExpediente.nombre }}
-                                </h5>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">{{ currentExpediente.numero }} - {{ currentExpediente.nombre }}</h5>
+                                <button class="btn btn-action btn-primary rounded-circle container"
+                                (click)="editarExpediente(currentExpediente)">
+                                    <i class="fas fa-pencil-alt text-white"></i>
+                                </button>
                             </div>
                             <div class="card-body">
                                 <!-- Detalles del expediente -->
