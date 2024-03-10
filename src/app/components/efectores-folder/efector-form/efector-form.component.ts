@@ -60,8 +60,6 @@ export class EfectorFormComponent {
     this.efectorDataSubscription?.unsubscribe();
   }
 
-
-
   onSubmit() {
     this.isLoading = true;
     if (this.efectorForm.valid) {
@@ -72,7 +70,7 @@ export class EfectorFormComponent {
         this.apiService.postData(this.endpoint, this.efector)
           .subscribe(
             (data: any) => {
-              console.log("data: ", data);
+              this.efectorData.updateEfectores();
               this.resetForm();
               this.isLoading = false;
               this.location.back();
@@ -88,6 +86,7 @@ export class EfectorFormComponent {
         this.apiService.putData(this.endpoint, this.efector)
           .subscribe(
             (data: any) => {
+              this.efectorData.updateEfectores();
               this.resetForm();
               this.isLoading = false;
               this.location.back();

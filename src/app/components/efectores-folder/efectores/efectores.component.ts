@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../services/api.service';
 import { Efector } from '../../../interfaces/efector';
 import { AuthService } from '../../../services/auth.service';
 import { EfectorDataService } from '../../../services/efector-data.service';
@@ -18,29 +17,20 @@ export class EfectoresComponent implements OnInit {
   isAdmin: Boolean = false;
   isLoading: boolean = false;
 
-  // paginacion
-  currentPage: number = 0;
-  pageSize: number = 20;
-  totalItems: number = 0;
-
-  private endpoint: string = 'efectores';
-
-  constructor(private apiService: ApiService, private router: Router, private authService: AuthService, private efectorData: EfectorDataService) { }
+  constructor(private router: Router, private authService: AuthService, private efectorData: EfectorDataService) { }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
       this.isAdmin = data;
-    })
+    });
     this.fetchData();
   }
 
   fetchData(): void {
     this.isLoading = true;
-    this.apiService.fetchData(this.endpoint).subscribe((data: any) => {
-      data = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
-      this.efectoresOriginal = data;
-      this.efectorData.changeListaEfectores(data);
-      this.efectores = data;
+    this.efectorData.updateEfectores();
+    this.efectorData.currentListaEfectores.subscribe((data: Efector[]) => {
+      this.efectores = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
       this.isLoading = false;
     });
   }

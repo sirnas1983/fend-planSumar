@@ -19,7 +19,7 @@ export class ExpedientesComponent implements OnInit {
   isLoading: boolean = false;
   private endpoint: string = 'expedientes';
 
-  constructor(private apiService: ApiService, private router: Router, private authService: AuthService, private expedienteData: ExpedienteDataService) { }
+  constructor(private router: Router, private authService: AuthService, private expedienteData: ExpedienteDataService) { }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
@@ -30,8 +30,7 @@ export class ExpedientesComponent implements OnInit {
 
   fetchData(): void {
     this.isLoading = true;
-    this.apiService.fetchData(this.endpoint).subscribe((data: any) => {
-      // Aquí puedes agregar lógica adicional para procesar los datos si es necesario
+    this.expedienteData.currentListaExpediente.subscribe((data: any) => {
       this.expedientesOriginal = data.data;
       this.expedientes = data.data;
       this.isLoading = false;
