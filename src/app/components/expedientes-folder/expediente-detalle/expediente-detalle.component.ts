@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpedienteDataService } from '../../../services/expediente-data.service';
 import { ApiService } from '../../../services/api.service';
-import { API_ROOT } from '../../../constants/constants';
 import { Resolucion } from '../../../interfaces/resolucion';
 import { Expediente } from '../../../interfaces/expediente';
 import { Router } from '@angular/router';
+import { ResolucionDataService } from '../../../services/resolucion-data.service';
 
 @Component({
   selector: 'app-expediente-detalle',
@@ -20,7 +20,10 @@ export class ExpedienteDetalleComponent implements OnInit {
   resolucion!: Resolucion;
   hasExpediente: boolean = false;
 
-  constructor(private expedienteService: ExpedienteDataService, private apiService: ApiService, private router:Router) { }
+  constructor(private expedienteService: ExpedienteDataService, 
+    private apiService: ApiService, 
+    private router:Router,
+    private resolucionData: ResolucionDataService) { }
 
   ngOnInit(): void {
     // Suscripción al observable currentExpediente
@@ -34,11 +37,11 @@ export class ExpedienteDetalleComponent implements OnInit {
   }
 
   agregarResolucion() : void{
-    null;
+    this.router.navigateByUrl('/dashboard/resoluciones/crear');
   }
 
   verResolucion(resolucion : Resolucion){
-    console.log(resolucion);
+    this.resolucionData.changeResolucion(resolucion);
   }
 
   toggleResoluciones() {
@@ -54,9 +57,10 @@ export class ExpedienteDetalleComponent implements OnInit {
   loadResolucion(): void {
     this.apiService.fetchData(this.endpoint).subscribe(
       (resolucion: any) => {
-        if (resolucion) {
-          this.resolucion = resolucion;
-          this.hasExpediente = !!resolucion.expedienteDTO; // Verificar si existe expedienteDTO
+        console.log(resolucion);
+        if (resolucion.length > 0) {
+          this.resolucion = resolucion[0];
+          this.hasExpediente = true; // Verificar si existe expedienteDTO
         } else {
           console.error('No se encontró la resolución');
         }
@@ -65,6 +69,11 @@ export class ExpedienteDetalleComponent implements OnInit {
         console.error('Error al cargar la resolución:', error);
       }
     );
+  }
+
+  editarResolucion(resolucion : Resolucion){
+    this.resolucionData.changeResolucion(resolucion);
+    this.router.navigateByUrl('/dashboard/resoluciones/modificar')
   }
 }
 

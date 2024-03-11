@@ -36,7 +36,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Número</th>
-                                                    <th>CUIE<br>solicitante</th>
+                                                    <th>CUIE</th>
                                                     <th>Titulo</th>
                                                     <th>Fecha</th>
                                                     <th>Monto Solicitado</th>
@@ -56,7 +56,7 @@
                                                     <td>{{ expediente.numero }}</td>
                                                     <td>{{ expediente.efector.cuie }}</td>
                                                     <td>{{ expediente.nombre }}</td>
-                                                    <td>{{ expediente.fechaExpediente }}</td>
+                                                    <td>{{ expediente.fechaExpediente | fechaFormato }}</td>
                                                     <td>{{ expediente.montoSolicitado | currencyFormat }}</td>
                                                     <td>
                                                         <div class="btn-group me-3" role="group" aria-label="Acciones">

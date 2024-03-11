@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WelcomeScreenComponent } from './components/usuarios-folder/welcome-screen/welcome-screen.component';
 import { LoginComponent } from './components/usuarios-folder/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -13,6 +12,8 @@ import { EfectorFormComponent } from './components/efectores-folder/efector-form
 import { EfectorDetalleComponent } from './components/efectores-folder/efector-detalle/efector-detalle.component';
 import { ExpedienteDetalleComponent } from './components/expedientes-folder/expediente-detalle/expediente-detalle.component';
 import { ExpedienteFormComponent } from './components/expedientes-folder/expediente-form/expediente-form.component';
+import { ResolucionFormComponent } from './components/resoluciones-folder/resolucion-form/resolucion-form.component';
+import { ResolucionDetalleComponent } from './components/resoluciones-folder/resolucion-detalle/resolucion-detalle.component';
 
 
 const routes: Routes = [
@@ -35,7 +36,12 @@ const routes: Routes = [
             { path: 'modificar', component: ExpedienteFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Expediente' } },
           ]
       },
-      { path: 'resoluciones', component: ResolucionesComponent, data: { title: 'Resoluciones' } },
+      { path: 'resoluciones', component: ResolucionesComponent, data: { title: 'Resoluciones' }, children:
+      [
+        { path: 'crear', component: ResolucionFormComponent, canActivate: [AdminGuard], data: { title: 'Crear Resolucion' } },
+        { path: 'detalle', component: ResolucionDetalleComponent, data: { title: 'Detalle de Resolucion' } },
+        { path: 'modificar', component: ResolucionFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Resolucion' } },
+      ] },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard], data: { title: 'Usuarios' } },
     ]
   },

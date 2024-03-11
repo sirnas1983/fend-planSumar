@@ -28,6 +28,10 @@ import { RegistrosComponent } from './components/registros-folder/registros/regi
 import { ExpedientesTableComponent } from './components/expedientes-folder/expedientes-table/expedientes-table.component';
 import { ExpedienteDetalleComponent } from './components/expedientes-folder/expediente-detalle/expediente-detalle.component';
 import { ExpedienteFormComponent } from './components/expedientes-folder/expediente-form/expediente-form.component';
+import { ResolucionFormComponent } from './components/resoluciones-folder/resolucion-form/resolucion-form.component';
+import { FechaFormatoPipe } from './pipes/fecha-formato.pipe';
+import { ResolucionDetalleComponent } from './components/resoluciones-folder/resolucion-detalle/resolucion-detalle.component';
+
 registerLocaleData(localeEs);
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ registerLocaleData(localeEs);
     WelcomeScreenComponent,
 
     DashboardComponent,
+
     ResolucionesComponent,
+    ResolucionFormComponent,
+    ResolucionDetalleComponent,
 
     EfectoresComponent,
     EfectorFormComponent,
@@ -51,7 +58,8 @@ registerLocaleData(localeEs);
     ExpedienteDetalleComponent,
     ExpedienteFormComponent,
 
-    CurrencyFormatPipe
+    CurrencyFormatPipe,
+    FechaFormatoPipe
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,7 @@ registerLocaleData(localeEs);
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     DecimalPipe,
-
+    FechaFormatoPipe
   ],
   bootstrap: [AppComponent]
 })

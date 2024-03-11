@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -14,34 +14,24 @@ import { EfectorDataService } from '../../../services/efector-data.service';
   templateUrl: './expediente-form.component.html',
   styleUrls: ['./expediente-form.component.css']
 })
-export class ExpedienteFormComponent implements OnDestroy {
+export class ExpedienteFormComponent implements OnInit, OnDestroy {
 
   endpoint: string = 'expedientes';
   efectoresEndpoint: string = 'efectores';
   expediente!: Expediente;
   isLoading: boolean = false;
-  efectores : Efector[] = [];
+  efectores: Efector[] = [];
   expedienteForm: FormGroup;
   expedienteDataSubscription: Subscription | undefined;
 
   constructor(
     private apiService: ApiService,
     private errorHandlingService: ErrorHandlingService,
-    private expedienteData : ExpedienteDataService,
+    private expedienteData: ExpedienteDataService,
     private location: Location,
     private fb: FormBuilder,
-    private efectorData : EfectorDataService,
+    private efectorData: EfectorDataService,
   ) {
-    this.efectorData.currentListaEfectores.subscribe(data =>{
-      if (data === null){
-        this.efectores = data;
-      } else {
-        this.apiService.fetchData(this.efectoresEndpoint).subscribe((data:any) =>{
-          this.efectorData.changeListaEfectores(data);
-          this.efectores = data;
-        })
-      }
-    })
     this.expedienteForm = this.fb.group({
       id: [''],
       nombre: ['', Validators.required],
@@ -49,15 +39,30 @@ export class ExpedienteFormComponent implements OnDestroy {
       efector: ['', Validators.required],
       montoSolicitado: ['', Validators.required],
       fechaExpediente: ['', Validators.required],
-      descripcion: ['']
+      descripcion: [''],
     });
+  }
 
-    this.expedienteForm.get('id')?.disable();
+  ngOnInit(): void {
     this.expedienteDataSubscription = this.expedienteData.currentExpediente.subscribe(data => {
-      console.log(data);
-      this.expediente = data;
-      this.expedienteForm.patchValue(data); // Patch the form with received data
+      if (data) {
+        this.expediente = data;
+        this.expedienteForm.patchValue(data);
+        this.efectorData.currentListaEfectores.subscribe(data => {
+          if (data !== null) {
+            this.efectores = data;
+          } else {
+            this.apiService.fetchData(this.efectoresEndpoint).subscribe((data: any) => {
+              this.efectorData.changeListaEfectores(data);
+              this.efectores = data;
+            })
+          }
+          const efector = this.expediente.efector;
+          this.expedienteForm.get('efector')?.setValue(this.efectores.find(ef => ef.id === efector.id));
+        });
+      }
     });
+    this.expedienteForm.get('id')?.disable();
   }
 
   ngOnDestroy(): void {

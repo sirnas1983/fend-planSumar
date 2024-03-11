@@ -3,6 +3,9 @@ import { Efector } from '../../../interfaces/efector';
 import { AuthService } from '../../../services/auth.service';
 import { EfectorDataService } from '../../../services/efector-data.service';
 import { Router } from '@angular/router';
+import { ExpedientesComponent } from '../../expedientes-folder/expedientes/expedientes.component';
+import { Expediente } from '../../../interfaces/expediente';
+import { ExpedienteDataService } from '../../../services/expediente-data.service';
 
 @Component({
   selector: 'app-efectores',
@@ -17,7 +20,10 @@ export class EfectoresComponent implements OnInit {
   isAdmin: Boolean = false;
   isLoading: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private efectorData: EfectorDataService) { }
+  constructor(private router: Router, 
+    private authService: AuthService, 
+    private efectorData: EfectorDataService,
+    private expedienteData: ExpedienteDataService) { }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
@@ -30,8 +36,10 @@ export class EfectoresComponent implements OnInit {
     this.isLoading = true;
     this.efectorData.updateEfectores();
     this.efectorData.currentListaEfectores.subscribe((data: Efector[]) => {
-      this.efectores = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
-      this.isLoading = false;
+      if (data) {
+        this.efectores = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
+        this.isLoading = false;
+      }
     });
   }
 
@@ -59,18 +67,8 @@ export class EfectoresComponent implements OnInit {
   }
 
   agregarRegistro(efector: Efector) {
-
+    //TODO: Agregar formulario para agregar registro... quizas dentro del mismo detalle
     console.log('Agregar registro:', efector);
-  }
-
-  inhabilitarEfector(efector: Efector) {
-    // Aquí puedes implementar la lógica para inhabilitar el efector
-    console.log('Inhabilitar efector:', efector);
-  }
-
-  agregarExpediente(efector: Efector) {
-    this.efectorData.changeEfector(efector);
-    console.log('Agregar expediente:', efector);
   }
 
   agregarEfector() {

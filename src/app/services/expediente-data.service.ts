@@ -12,7 +12,7 @@ export class ExpedienteDataService {
   currentExpediente = this.expedienteSource.asObservable();
 
   private listaExpedienteSource = new BehaviorSubject< any >(null);
-  currentListaExpediente = this.expedienteSource.asObservable();
+  currentListaExpediente = this.listaExpedienteSource.asObservable();
 
   constructor(private apiService : ApiService) { }
 
@@ -26,7 +26,11 @@ export class ExpedienteDataService {
 
   updateExpedientes(){
     this.apiService.fetchData(API_EXPEDIENTES).subscribe((data:any)=>{
-      this.changeListaExpedientes(data);
+      this.changeListaExpedientes(data.data);
     })
+  }
+
+  fetchExpedientesPorCuie(cuie : string){
+    return this.apiService.fetchData(API_EXPEDIENTES + "?cuie=" + cuie);
   }
 }

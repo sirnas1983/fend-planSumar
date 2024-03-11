@@ -6,9 +6,10 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card card-rounded">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">{{ currentExpediente.numero }} - {{ currentExpediente.nombre }}</h5>
+                                <h5 class="card-title mb-0">{{ currentExpediente.numero }} - {{ currentExpediente.nombre
+                                    }}</h5>
                                 <button class="btn btn-action btn-primary rounded-circle container"
-                                (click)="editarExpediente(currentExpediente)">
+                                    (click)="editarExpediente(currentExpediente)">
                                     <i class="fas fa-pencil-alt text-white"></i>
                                 </button>
                             </div>
@@ -16,7 +17,7 @@
                                 <!-- Detalles del expediente -->
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <p><strong>Fecha Expediente:</strong> {{ currentExpediente.fechaExpediente }}
+                                        <p><strong>Fecha Expediente:</strong> {{ currentExpediente.fechaExpediente | fechaFormato}}
                                         </p>
                                         <p><strong>EFECTOR:</strong> {{ currentExpediente.efector.nombre }} - {{
                                             currentExpediente.efector.cuie }}</p>
@@ -26,10 +27,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p><strong>Fecha de Creación:</strong> {{
-                                            currentExpediente.auditorDTO.fechaCreacion }}</p>
+                                            currentExpediente.auditorDTO.fechaCreacion | fechaFormato}}</p>
                                         <p><strong>Creado Por:</strong> {{ currentExpediente.auditorDTO.creadoPor }}</p>
                                         <p><strong>Fecha de Modificación:</strong> {{
-                                            currentExpediente.auditorDTO.fechaModificacion }}</p>
+                                            currentExpediente.auditorDTO.fechaModificacion | fechaFormato}}</p>
                                         <p><strong>Modificado Por:</strong> {{
                                             currentExpediente.auditorDTO.modificadoPor }}</p>
                                     </div>
@@ -49,10 +50,25 @@
                                                 </div>
                                             </ng-container>
                                             <ng-container *ngIf="hasExpediente">
-                                                {{ resolucion.numero }} <button class="btn btn-dark rounded-circle"
-                                                    (click)="verResolucion(resolucion)">
-                                                    <i class="fas fa-eye text-white"></i>
-                                                </button>
+                                                <div class="btn-group d-flex justify-content-between align-items-center me-3"
+                                                    role="group" aria-label="Acciones">
+                                                    <span class="flex-grow-1 me-3">
+                                                        Resolucion N°: {{ resolucion.numero }} - Fecha: {{
+                                                        resolucion.fechaResolucion | fechaFormato}}
+                                                    </span>
+                                                    <div class="btn-group me-3" role="group" aria-label="Acciones">
+
+                                                        <button class="btn btn-action btn-dark rounded-circle container"
+                                                            (click)="verResolucion(resolucion)">
+                                                            <i class="fas fa-eye text-white"></i>
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-action btn-primary rounded-circle container"
+                                                            (click)="editarResolucion(resolucion)">
+                                                            <i class="fas fa-pencil-alt text-white"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </ng-container>
                                         </p>
                                     </div>

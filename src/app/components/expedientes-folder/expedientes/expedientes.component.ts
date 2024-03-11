@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../services/api.service';
 import { Expediente } from '../../../interfaces/expediente';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
@@ -17,7 +16,6 @@ export class ExpedientesComponent implements OnInit {
   expedientes: Expediente[] = [];
   isAdmin: boolean = false;
   isLoading: boolean = false;
-  private endpoint: string = 'expedientes';
 
   constructor(private router: Router, private authService: AuthService, private expedienteData: ExpedienteDataService) { }
 
@@ -30,10 +28,13 @@ export class ExpedientesComponent implements OnInit {
 
   fetchData(): void {
     this.isLoading = true;
+    this.expedienteData.updateExpedientes();
     this.expedienteData.currentListaExpediente.subscribe((data: any) => {
-      this.expedientesOriginal = data.data;
-      this.expedientes = data.data;
-      this.isLoading = false;
+      if (data.length>0) {
+        this.expedientesOriginal = data;
+        this.expedientes = data;
+        this.isLoading = false;
+      }
     });
   }
 
@@ -42,18 +43,22 @@ export class ExpedientesComponent implements OnInit {
   }
 
   filtrarLista(event: any): void {
-    const busqueda = (event.target as HTMLInputElement)?.value.toLowerCase() || '';
-    this.expedientes = this.expedientesOriginal.filter(item =>
-      (item.numero && item.numero.toLowerCase().includes(busqueda)) ||
-      (item.nombre && item.nombre.toLowerCase().includes(busqueda)) ||
-      (item.descripcion && item.descripcion.toLowerCase().includes(busqueda)) ||
-      (item.efector && item.efector.cuie && item.efector.cuie.toLowerCase().includes(busqueda))
-    );
-}
+    const busqueda = (event.target as HTMLInputElement)?.value.trim().toLowerCase();
+    if (busqueda === '') {
+      this.expedientes = this.expedientesOriginal;
+    } else {
+      this.expedientes = this.expedientesOriginal.filter(item =>
+        (item.numero && item.numero.toLowerCase().includes(busqueda)) ||
+        (item.nombre && item.nombre.toLowerCase().includes(busqueda)) ||
+        (item.descripcion && item.descripcion.toLowerCase().includes(busqueda)) ||
+        (item.efector.cuie.toLowerCase().includes(busqueda))
+      );
+    }
+  }
+  
 
   verExpediente(expediente: Expediente) {
     this.expedienteData.changeExpediente(expediente);
-    console.log(expediente);
     this.router.navigateByUrl('/dashboard/expedientes/detalle');
   }
 
@@ -62,7 +67,7 @@ export class ExpedientesComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/expedientes/modificar');
   }
 
-  agregarExpediente() {
+  public agregarExpediente() {
     const expediente: Expediente = {
       id: '',
       nombre: '',

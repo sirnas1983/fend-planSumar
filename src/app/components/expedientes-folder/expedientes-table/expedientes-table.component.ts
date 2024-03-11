@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Efector } from '../../../interfaces/efector';
 import { Expediente } from '../../../interfaces/expediente';
 import { EfectorDataService } from '../../../services/efector-data.service';
-import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { ExpedienteDataService } from '../../../services/expediente-data.service';
 import { Router } from '@angular/router';
+import { catchError, finalize, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-expedientes-table',
@@ -15,20 +15,28 @@ import { Router } from '@angular/router';
 export class ExpedientesTableComponent {
   efector!: Efector;
   expedientes: Expediente[] = [];
-  endpoint: string = '';
   cuie: string = '';
   isAdmin : boolean = false;
+  isLoading :boolean= true;
+  errorMessage: string = '';
 
   constructor(private efectorData: EfectorDataService, 
-    private apiService: ApiService, 
     private authService : AuthService, 
     private expedienteData : ExpedienteDataService,
     private router : Router) {
     this.efectorData.currentEfector.subscribe(data => {
+      this.isLoading = true;
       this.cuie = data.cuie;
       this.efector = data;
-      this.endpoint = `expedientes?cuie=${data.cuie}`;
-      this.apiService.fetchData(this.endpoint).subscribe((data: any) => {
+      this.expedienteData.fetchExpedientesPorCuie(this.cuie).pipe(
+        catchError(error => {
+          this.errorMessage = 'Error al cargar expedientes.';
+          return throwError(error);
+        }),
+        finalize(() => {
+          this.isLoading = false;
+        })
+      ).subscribe((data: any) => {
         // Obtener expedientes de la respuesta
         this.expedientes = data.data;
         // Ordenar expedientes por fecha de expediente
@@ -42,11 +50,27 @@ export class ExpedientesTableComponent {
   }
 
   agregarExpediente(){
-    return null;
+    const expediente : Expediente = {
+      id : '',
+      nombre: '',
+      numero: '',
+      montoSolicitado : 0,
+      descripcion: '',
+      efector : this.efector,
+      auditorDTO : {
+        creadoPor: '',
+        fechaCreacion: '',
+        fechaModificacion: '',
+        modificadoPor: '',
+        id: ''
+      },
+      fechaExpediente: ''
+    }
+    this.expedienteData.changeExpediente(expediente);
+    this.router.navigateByUrl('/dashboard/expedientes/crear')  
   }
 
- 
-  verExpediente(expediente : Expediente){
+   verExpediente(expediente : Expediente){
     this.expedienteData.changeExpediente(expediente);
     this.router.navigateByUrl('/dashboard/expedientes/detalle')
   }

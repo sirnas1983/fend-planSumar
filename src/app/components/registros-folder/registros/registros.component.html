@@ -20,7 +20,7 @@
             <tbody>
                 <tr *ngFor="let registro of registros">
 
-                    <td>{{ registro.fecha }}</td>
+                    <td>{{ registro.fecha | fechaFormato }}</td>
                     <td>{{ registro.detalle }}</td>
                     <td *ngIf="registro.tipoRegistro === 'HABER'">{{ registro.monto | currencyFormat }}</td>
                     <td *ngIf="registro.tipoRegistro === 'DEBE'"></td>
