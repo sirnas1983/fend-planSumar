@@ -273,3 +273,9 @@
 .table-footer {
     border-top: 3px solid #dee2e6; /* Puedes ajustar el color y el estilo según tus preferencias */
 }
+
+/* FONDO DE FILA DE RESOLUCIONES CUANDO AMBOS MONTOS NO COINCIDEN*/
+.fondo-rojo-claro {
+    background-color: rgba(255, 0, 0, 0.8); /* Color rojo claro */
+}
+

@@ -74,6 +74,7 @@ export class ResolucionFormComponent implements OnInit {
               console.log("data: ", data);
               this.resetForm();
               this.isLoading = false;
+              this.resolucionData.updateResoluciones();
               this.location.back();
             },
             error => {
@@ -88,6 +89,7 @@ export class ResolucionFormComponent implements OnInit {
             (data: any) => {
               this.resetForm();
               this.isLoading = false;
+              this.resolucionData.updateResoluciones();
               this.location.back();
             },
             error => {

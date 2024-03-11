@@ -20,8 +20,8 @@ export class EfectoresComponent implements OnInit {
   isAdmin: Boolean = false;
   isLoading: boolean = false;
 
-  constructor(private router: Router, 
-    private authService: AuthService, 
+  constructor(private router: Router,
+    private authService: AuthService,
     private efectorData: EfectorDataService,
     private expedienteData: ExpedienteDataService) { }
 
@@ -37,7 +37,8 @@ export class EfectoresComponent implements OnInit {
     this.efectorData.updateEfectores();
     this.efectorData.currentListaEfectores.subscribe((data: Efector[]) => {
       if (data) {
-        this.efectores = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
+        this.efectoresOriginal = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
+        this.efectores = this.efectoresOriginal;
         this.isLoading = false;
       }
     });
@@ -48,12 +49,16 @@ export class EfectoresComponent implements OnInit {
   }
 
   filtrarLista(event: any): void {
-    const busqueda = (event.target as HTMLInputElement)?.value || '';
-    this.efectores = this.efectoresOriginal.filter(item =>
-      item.cuie.toLowerCase().includes(busqueda.toLowerCase()) ||
-      item.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      item.region.toLowerCase().includes(busqueda.toLowerCase())
-    );
+    const busqueda = (event.target as HTMLInputElement)?.value.trim().toLowerCase();
+    if (busqueda === '') {
+      this.efectores = this.efectoresOriginal;
+    } else {
+      this.efectores = this.efectoresOriginal.filter(item =>
+        item.cuie.toLowerCase().includes(busqueda.toLowerCase()) ||
+        item.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        item.region.toLowerCase().includes(busqueda.toLowerCase())
+      );
+    }
   }
 
   verEfector(efector: Efector) {

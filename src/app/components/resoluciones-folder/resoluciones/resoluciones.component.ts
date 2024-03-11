@@ -32,7 +32,7 @@ export class ResolucionesComponent implements OnInit {
     this.resolucionData.currentListaResoluciones.subscribe((data: Resolucion[] | null) => {
       if (data) {
         this.resolucionesOriginal = data;
-        this.resoluciones = data;
+        this.resoluciones = this.resolucionesOriginal;
       }
       this.isLoading = false; // Desactivamos el loader cuando se hayan cargado los datos
     });
@@ -43,13 +43,17 @@ export class ResolucionesComponent implements OnInit {
   }
 
   filtrarLista(event: any): void {
-    const busqueda = (event.target as HTMLInputElement)?.value.toLowerCase() || '';
-    this.resoluciones = this.resolucionesOriginal.filter(item =>
-      (item.numero && item.numero.toLowerCase().includes(busqueda)) ||
-      (item.nombre && item.nombre.toLowerCase().includes(busqueda)) ||
-      (item.descripcion && item.descripcion.toLowerCase().includes(busqueda)) ||
-      (item.expedienteDTO && item.expedienteDTO.nombre && item.expedienteDTO.nombre.toLowerCase().includes(busqueda))
-    );
+    const busqueda = (event.target as HTMLInputElement)?.value.trim().toLowerCase() || '';
+    if (busqueda === '') {
+      this.resoluciones = this.resolucionesOriginal;
+    } else {
+      this.resoluciones = this.resolucionesOriginal.filter(item =>
+        (item.numero && item.numero.toLowerCase().includes(busqueda)) ||
+        (item.nombre && item.nombre.toLowerCase().includes(busqueda)) ||
+        (item.descripcion && item.descripcion.toLowerCase().includes(busqueda)) ||
+        (item.expedienteDTO && item.expedienteDTO.nombre && item.expedienteDTO.nombre.toLowerCase().includes(busqueda))
+      );
+    }
   }
 
   verResolucion(resolucion: Resolucion) {

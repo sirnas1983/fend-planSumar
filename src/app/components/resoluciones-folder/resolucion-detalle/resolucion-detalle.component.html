@@ -6,7 +6,7 @@
                     <div class="col-12 grid-margin stretch-card">
                         <div class="card card-rounded">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">{{ currentResolucion.numero }} - {{ currentResolucion.nombre }}</h5>
+                                <h5 class="card-title mb-0">{{ currentResolucion?.numero }} - {{ currentResolucion?.nombre }}</h5>
                                 <button class="btn btn-action btn-primary rounded-circle container" (click)="editarResolucion(currentResolucion)">
                                     <i class="fas fa-pencil-alt text-white"></i>
                                 </button>
@@ -15,17 +15,17 @@
                                 <!-- Detalles de la resolución -->
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <p><strong>Fecha Resolución:</strong> {{ currentResolucion.fechaResolucion | fechaFormato }}</p>
-                                        <p><strong>Monto Otorgado:</strong> {{ currentResolucion.montoOtorgado | currencyFormat }}</p>
-                                        <p><strong>Descripción:</strong> {{ currentResolucion.descripcion }}</p>
-                                        <p><strong>Fondos Rendidos:</strong> {{ currentResolucion.isFondosRendidos ? 'Sí' : 'No' }}</p>
+                                        <p><strong>Fecha Resolución:</strong> {{ currentResolucion?.fechaResolucion || '' | fechaFormato }}</p>
+                                        <p><strong>Monto Otorgado:</strong> {{ currentResolucion?.montoOtorgado || 0 | currencyFormat  }}</p>
+                                        <p><strong>Descripción:</strong> {{ currentResolucion?.descripcion }}</p>
+                                        <p><strong>Fondos Rendidos:</strong> {{ currentResolucion?.isFondosRendidos ? 'Sí' : 'No' }}</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>Expediente Asociado:</strong> {{ currentResolucion.expedienteDTO.numero }} - {{ currentResolucion.expedienteDTO.nombre }}</p>
-                                        <p><strong>Creado Por:</strong> {{ currentResolucion.auditorDTO.creadoPor }}</p>
-                                        <p><strong>Fecha de Creación:</strong> {{ currentResolucion.auditorDTO.fechaCreacion | fechaFormato }}</p>
-                                        <p><strong>Modificado Por:</strong> {{ currentResolucion.auditorDTO.modificadoPor }}</p>
-                                        <p><strong>Fecha de Modificación:</strong> {{ currentResolucion.auditorDTO.fechaModificacion | fechaFormato }}</p>
+                                        <p><strong>Expediente Asociado:</strong> {{ currentResolucion?.expedienteDTO?.numero }} - {{ currentResolucion?.expedienteDTO?.nombre }}</p>
+                                        <p><strong>Creado Por:</strong> {{ currentResolucion?.auditorDTO?.creadoPor }}</p>
+                                        <p><strong>Fecha de Creación:</strong> {{ currentResolucion?.auditorDTO?.fechaCreacion || '' | fechaFormato }}</p>
+                                        <p><strong>Modificado Por:</strong> {{ currentResolucion?.auditorDTO?.modificadoPor }}</p>
+                                        <p><strong>Fecha de Modificación:</strong> {{ currentResolucion?.auditorDTO?.fechaModificacion || '' | fechaFormato }}</p>
                                     </div>
                                 </div>
                                 <!-- Fin de Detalles de la resolución -->

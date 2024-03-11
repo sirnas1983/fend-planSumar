@@ -22,7 +22,7 @@ export class ResolucionDetalleComponent implements OnInit {
     });
   }
 
-  editarResolucion(resolucion: Resolucion): void {
+  editarResolucion(resolucion: Resolucion | undefined): void {
 this.router.navigateByUrl('/dashboard/resoluciones/modificar')  }
 
 }

@@ -42,6 +42,7 @@ export class ExpedienteDetalleComponent implements OnInit {
 
   verResolucion(resolucion : Resolucion){
     this.resolucionData.changeResolucion(resolucion);
+    this.router.navigateByUrl('/dashboard/resoluciones/detalle')
   }
 
   toggleResoluciones() {
