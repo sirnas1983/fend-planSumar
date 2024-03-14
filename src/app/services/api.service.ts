@@ -35,4 +35,14 @@ export class ApiService {
       })
     );
   }
+
+  deleteData(endpoint: string, body: any) {
+    const url = `${API_ROOT}/${endpoint}`;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(url,{headers, body:body}).pipe(
+      catchError((error) => {
+        return throwError(error); // Pass the error to the subscriber
+      })
+    );
+  }
 }

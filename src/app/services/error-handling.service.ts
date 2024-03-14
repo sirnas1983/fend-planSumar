@@ -9,8 +9,7 @@ export class ErrorHandlingService {
   constructor(private snackBar: MatSnackBar) { }
 
   handleHttpError(error: any): void {
-    console.log(error);
-    if (error.status != 200) {
+    if (error.status != 200 && error.status != 404) {
       this.showSnackbar(`Recurso no encontrado`);
     }
   }

@@ -26,6 +26,7 @@ export class ExpedienteDataService {
 
   updateExpedientes(){
     this.apiService.fetchData(API_EXPEDIENTES).subscribe((data:any)=>{
+      console.log(data);
       this.changeListaExpedientes(data.data);
     })
   }

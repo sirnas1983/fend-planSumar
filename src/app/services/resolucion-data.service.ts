@@ -27,7 +27,6 @@ export class ResolucionDataService {
   updateResoluciones() {
     this.apiService.fetchData(API_RESOLUCIONES).subscribe((data: any) => {
       this.changeListaResoluciones(data);
-      console.log(data);
     });
   }
 
