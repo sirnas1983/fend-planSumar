@@ -14,35 +14,52 @@ import { ExpedienteDetalleComponent } from './components/expedientes-folder/expe
 import { ExpedienteFormComponent } from './components/expedientes-folder/expediente-form/expediente-form.component';
 import { ResolucionFormComponent } from './components/resoluciones-folder/resolucion-form/resolucion-form.component';
 import { ResolucionDetalleComponent } from './components/resoluciones-folder/resolucion-detalle/resolucion-detalle.component';
+import { RegistrosFormComponent } from './components/registros-folder/registros-form/registros-form.component';
+import { UsuariosFormComponent } from './components/usuarios-folder/usuarios-form/usuarios-form.component';
+import { UsuariosDetalleComponent } from './components/usuarios-folder/usuarios-detalle/usuarios-detalle.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, title: "inicioSesion", data: { title: 'Inicio de sesión' } },
+  { path: 'login', component: LoginComponent, title: 'Inicio de sesión' },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
       {
         path: 'efectores', component: EfectoresComponent, children:
           [
-            { path: 'crear', component: EfectorFormComponent, canActivate: [AdminGuard], data: { title: 'Crear Efector' } },
-            { path: 'modificar', component: EfectorFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Efector' } },
-            { path: 'detalle', component: EfectorDetalleComponent, data: { title: 'Detalle de Efector' } }
+            { path: 'crear', component: EfectorFormComponent, canActivate: [AdminGuard], title: 'Crear Efector' },
+            { path: 'modificar', component: EfectorFormComponent, canActivate: [AdminGuard], title: 'Editar Efector' },
+            { path: 'detalle', component: EfectorDetalleComponent, title: 'Detalle de Efector' }
           ]
       },
       {
+        path: 'registros/asentar', component: RegistrosFormComponent, canActivate: [AdminGuard], title: 'Asentar Registro'
+      }
+      ,
+      {
         path: 'expedientes', component: ExpedientesComponent, children:
           [
-            { path: 'crear', component: ExpedienteFormComponent, canActivate: [AdminGuard], data: { title: 'Crear Expediente' } },
-            { path: 'detalle', component: ExpedienteDetalleComponent, data: { title: 'Detalle de Expediente' } },
-            { path: 'modificar', component: ExpedienteFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Expediente' } },
+            { path: 'crear', component: ExpedienteFormComponent, canActivate: [AdminGuard], title: 'Crear Expediente' },
+            { path: 'detalle', component: ExpedienteDetalleComponent, title: 'Detalle de Expediente' },
+            { path: 'modificar', component: ExpedienteFormComponent, canActivate: [AdminGuard], title: 'Editar Expediente' },
           ]
       },
-      { path: 'resoluciones', component: ResolucionesComponent, data: { title: 'Resoluciones' }, children:
-      [
-        { path: 'crear', component: ResolucionFormComponent, canActivate: [AdminGuard], data: { title: 'Crear Resolucion' } },
-        { path: 'detalle', component: ResolucionDetalleComponent, data: { title: 'Detalle de Resolucion' } },
-        { path: 'modificar', component: ResolucionFormComponent, canActivate: [AdminGuard], data: { title: 'Modificar Resolucion' } },
-      ] },
-      { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard], data: { title: 'Usuarios' } },
+      {
+        path: 'resoluciones', component: ResolucionesComponent, data: { title: 'Resoluciones' }, children:
+          [
+            { path: 'crear', component: ResolucionFormComponent, canActivate: [AdminGuard], title: 'Crear Resolucion' },
+            { path: 'detalle', component: ResolucionDetalleComponent, title: 'Detalle de Resolucion' },
+            { path: 'modificar', component: ResolucionFormComponent, canActivate: [AdminGuard], title: 'Editar Resolucion' },
+          ]
+      },
+      {
+        path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard], title: 'Usuarios', children:
+          [
+            { path: 'crear', component: UsuariosFormComponent, title: 'Crear Usuario' },
+            { path: 'modificar', component: UsuariosFormComponent, title: 'Editar Usuario' },
+            { path: 'detalle', component: UsuariosDetalleComponent, title: 'Detalle de Usuario' },
+
+          ]
+      },
     ]
   },
   { path: '**', redirectTo: '/login', pathMatch: 'full', data: { title: 'Inicio de sesión' } },

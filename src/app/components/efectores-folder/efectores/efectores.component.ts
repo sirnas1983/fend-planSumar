@@ -3,41 +3,37 @@ import { Efector } from '../../../interfaces/efector';
 import { AuthService } from '../../../services/auth.service';
 import { EfectorDataService } from '../../../services/efector-data.service';
 import { Router } from '@angular/router';
-import { ExpedientesComponent } from '../../expedientes-folder/expedientes/expedientes.component';
-import { Expediente } from '../../../interfaces/expediente';
-import { ExpedienteDataService } from '../../../services/expediente-data.service';
 
 @Component({
   selector: 'app-efectores',
   templateUrl: './efectores.component.html',
-  styleUrls: ['./efectores.component.css']
+  styleUrl: './efectores.component.css'
 })
 export class EfectoresComponent implements OnInit {
 
   cantEfectores: number = 0;
   efectoresOriginal: Efector[] = [];
   efectores: Efector[] = [];
-  isAdmin: Boolean = false;
-  isLoading: boolean = false;
+  isAdmin: boolean = false;
+  isLoading: boolean;
 
   constructor(private router: Router,
     private authService: AuthService,
     private efectorData: EfectorDataService,
-    private expedienteData: ExpedienteDataService) { }
+    ) { 
+      this.isLoading=true;
+    }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
       this.isAdmin = data;
     });
-    this.fetchData();
-  }
-
-  fetchData(): void {
-    this.isLoading = true;
+    console.log(this.isLoading);
     this.efectorData.updateEfectores();
     this.efectorData.currentListaEfectores.subscribe((data: Efector[]) => {
+      this.isLoading = true;
       if (data) {
-        this.efectoresOriginal = data.sort((a: Efector, b: Efector) => a.region.localeCompare(b.region));
+        this.efectoresOriginal = data;
         this.efectores = this.efectoresOriginal;
         this.isLoading = false;
       }
@@ -63,17 +59,19 @@ export class EfectoresComponent implements OnInit {
 
   verEfector(efector: Efector) {
     this.efectorData.changeEfector(efector);
+    this.efectorData.fetchEfectorByCuie(efector.cuie);
     this.router.navigateByUrl('/dashboard/efectores/detalle');
   }
 
   editarEfector(efector: Efector) {
     this.efectorData.changeEfector(efector);
+    this.efectorData.fetchEfectorByCuie(efector.cuie);
     this.router.navigateByUrl('/dashboard/efectores/modificar');
   }
 
   agregarRegistro(efector: Efector) {
-    //TODO: Agregar formulario para agregar registro... quizas dentro del mismo detalle
-    console.log('Agregar registro:', efector);
+    this.efectorData.changeEfector(efector);
+    this.router.navigateByUrl('/dashboard/registros/asentar');
   }
 
   agregarEfector() {

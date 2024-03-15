@@ -33,7 +33,7 @@
                                                     <th>Fecha</th>
 
                                                     <th>Expediente</th>
-                                                    <th>Nombre</th>
+                                                    <th>Efector</th>
                                                     <th>Monto Solicitado</th>
                                                     <th>Monto Otorgado</th>
                                                     <th>Acciones</th>
@@ -52,7 +52,7 @@
                                                     <td>{{ resolucion.numero }}</td>
                                                     <td>{{ resolucion.fechaResolucion | fechaFormato}}</td>
                                                     <td>{{ resolucion.expedienteDTO.nombre }}</td>
-                                                    <td>{{ resolucion.nombre }}</td>
+                                                    <td>{{ resolucion.expedienteDTO.efectorDTO.cuie }} - {{ resolucion.expedienteDTO.efectorDTO.nombre }}</td>
                                                     <td>{{ resolucion.expedienteDTO.montoSolicitado | currencyFormat }}
                                                     </td>
                                                     <td>{{ resolucion.montoOtorgado | currencyFormat }}</td>

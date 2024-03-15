@@ -8,34 +8,56 @@
                 Agregar
             </button>
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Detalle</th>
-                    <th>Haber</th>
-                    <th>Debe</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let registro of registros">
-
-                    <td>{{ registro.fecha | fechaFormato }}</td>
-                    <td>{{ registro.detalle }}</td>
-                    <td *ngIf="registro.tipoRegistro === 'HABER'">{{ registro.monto | currencyFormat }}</td>
-                    <td *ngIf="registro.tipoRegistro === 'DEBE'"></td>
-                    <td *ngIf="registro.tipoRegistro === 'DEBE'">{{ registro.monto | currencyFormat }}</td>
-                    <td *ngIf="registro.tipoRegistro === 'HABER'"></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr class="table-footer">
-                    <td></td>
-                    <td><b>Suma de totales: </b></td>
-                    <td>{{ efector.totalHaber | currencyFormat }}</td>
-                    <td>{{ efector.totalDebe | currencyFormat }}</td>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Detalle</th>
+                        <th>Haber</th>
+                        <th>Debe</th>
+                        <ng-container *ngIf="isAdmin">
+                            <th>Acciones</th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="isLoading">
+                        <td colspan="5">
+                            <app-spinner *ngIf="isLoading" name="registros"></app-spinner>
+                        </td>
+                    </tr>
+                    <tr *ngIf="registros.length===0 && !isLoading">
+                        <td colspan="5">No se encontraron registros para este efector</td>
+                    </tr>
+                    <tr *ngFor="let registro of registros">
+                        <td>{{ registro.fecha | fechaFormato }}</td>
+                        <td>{{ registro.detalle }}</td>
+                        <td *ngIf="registro.tipoRegistro === 'HABER'">{{ registro.monto | currencyFormat }}</td>
+                        <td *ngIf="registro.tipoRegistro === 'DEBE'"></td>
+                        <td *ngIf="registro.tipoRegistro === 'DEBE'">{{ registro.monto | currencyFormat }}</td>
+                        <td *ngIf="registro.tipoRegistro === 'HABER'"></td>
+                        <td>
+                            <div class="btn-group me-3" role="group" aria-label="Acciones">
+                                <ng-container *ngIf="isAdmin">
+                                    <button class="btn btn-action btn-primary rounded-circle container"
+                                        (click)="editarRegistro(registro)">
+                                        <i class="fas fa-pencil-alt text-white"></i>
+                                    </button>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="table-footer" *ngIf="!isLoading">
+                        <td></td>
+                        <td><b>Suma de totales: </b></td>
+                        <td>{{ efector.totalHaber | currencyFormat }}</td>
+                        <td>{{ efector.totalDebe | currencyFormat }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>

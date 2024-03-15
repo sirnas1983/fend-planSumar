@@ -6,6 +6,8 @@ import { AuthService } from '../../../services/auth.service';
 import { ExpedienteDataService } from '../../../services/expediente-data.service';
 import { Router } from '@angular/router';
 import { catchError, finalize, throwError } from 'rxjs';
+import { ApiService } from '../../../services/api.service';
+import { API_EXPEDIENTES } from '../../../constants/constants';
 
 @Component({
   selector: 'app-expedientes-table',
@@ -16,14 +18,17 @@ export class ExpedientesTableComponent {
   efector!: Efector;
   expedientes: Expediente[] = [];
   cuie: string = '';
-  isAdmin : boolean = false;
-  isLoading :boolean= true;
+  isAdmin: boolean = false;
+  isLoading: boolean = true;
   errorMessage: string = '';
 
-  constructor(private efectorData: EfectorDataService, 
-    private authService : AuthService, 
-    private expedienteData : ExpedienteDataService,
-    private router : Router) {
+  constructor(
+    private efectorData: EfectorDataService,
+    private authService: AuthService,
+    private expedienteData: ExpedienteDataService,
+    private router: Router,
+    private apiService: ApiService
+  ) {
     this.efectorData.currentEfector.subscribe(data => {
       this.isLoading = true;
       this.cuie = data.cuie;
@@ -44,40 +49,45 @@ export class ExpedientesTableComponent {
       });
     });
     this.authService.isAdmin$.subscribe((data: boolean) => {
-      console.log("desde exp", data);
       this.isAdmin = data;
     })
   }
 
-  agregarExpediente(){
-    const expediente : Expediente = {
-      id : '',
+  agregarExpediente() {
+    const expediente: Expediente = {
+      id: '',
       nombre: '',
       numero: '',
-      montoSolicitado : 0,
+      montoSolicitado: 0,
       descripcion: '',
-      efector : this.efector,
-      auditorDTO : {
+      efectorDTO: this.efector,
+      auditorDTO: {
         creadoPor: '',
         fechaCreacion: '',
         fechaModificacion: '',
         modificadoPor: '',
         id: ''
       },
-      fechaExpediente: ''
+      fechaExpediente: new Date().toISOString().slice(0, 10)
     }
     this.expedienteData.changeExpediente(expediente);
-    this.router.navigateByUrl('/dashboard/expedientes/crear')  
+    this.router.navigateByUrl('/dashboard/expedientes/crear')
   }
 
-   verExpediente(expediente : Expediente){
+  verExpediente(expediente: Expediente) {
     this.expedienteData.changeExpediente(expediente);
     this.router.navigateByUrl('/dashboard/expedientes/detalle')
   }
 
-  editarExpediente(expediente : Expediente){
+  editarExpediente(expediente: Expediente) {
     this.expedienteData.changeExpediente(expediente);
     this.router.navigateByUrl('/dashboard/expedientes/modificar')
+  }
+
+  borrarExpediente(expediente: Expediente) {
+    this.apiService.deleteData(API_EXPEDIENTES, expediente).subscribe(data => {
+      console.log(data);
+    })
   }
 
 }

@@ -32,13 +32,14 @@ export class ResolucionFormComponent implements OnInit {
     private fb: FormBuilder,
     private expedienteData: ExpedienteDataService,
   ) {
+    const today = new Date().toISOString().slice(0, 10);
     this.resolucionForm = this.fb.group({
       id: [''],
-      nombre: ['', Validators.required],
       numero: ['', Validators.required],
+      nombre: ['', Validators.required],
       expedienteDTO: ['', Validators.required],
       montoOtorgado: ['', Validators.required],
-      fechaResolucion: ['', Validators.required],
+      fechaResolucion: [today, Validators.required],
       descripcion: [''],
       isFondosRendidos : [false]
     });
@@ -71,14 +72,13 @@ export class ResolucionFormComponent implements OnInit {
         this.apiService.postData(this.endpoint, this.resolucion)
           .subscribe(
             (data: any) => {
-              console.log("data: ", data);
               this.resetForm();
               this.isLoading = false;
               this.resolucionData.updateResoluciones();
+              this.resolucionData.changeResolucion(this.resolucion);
               this.location.back();
             },
             error => {
-              console.log("error: ", error);
               this.errorHandlingService.handleHttpError(error);
               this.isLoading = false;
             }
@@ -90,6 +90,7 @@ export class ResolucionFormComponent implements OnInit {
               this.resetForm();
               this.isLoading = false;
               this.resolucionData.updateResoluciones();
+              this.resolucionData.changeResolucion(this.resolucion);
               this.location.back();
             },
             error => {

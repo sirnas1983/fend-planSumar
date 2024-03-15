@@ -1,0 +1,92 @@
+<div class="tab-content tab-content-basic">
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-body">
+                                <!-- Aquí va el formulario -->
+                                <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+                                    <h4 class="card-title">Nuevo Registro</h4>
+                                    <!-- Campo ID -->
+                                    <div class="form-group">
+                                        <label for="id">ID</label>
+                                        <input type="text" formControlName="id" class="form-control" id="id" name="id"
+                                            readonly>
+                                    </div>
+                                    <!-- Campo Fecha -->
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha</label>
+                                        <input type="date" formControlName="fecha" class="form-control" id="fecha"
+                                            name="fecha">
+                                        <mat-error *ngIf="registroForm.get('fecha')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
+                                    </div>
+                                    <!-- Campo Monto -->
+                                    <div class="form-group">
+                                        <label for="monto">Monto</label>
+                                        <input type="number" formControlName="monto" class="form-control" id="monto"
+                                            name="monto">
+                                        <mat-error *ngIf="registroForm.get('monto')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
+                                    </div>
+                                    <!-- Campo Detalle -->
+                                    <div class="form-group">
+                                        <label for="detalle">Detalle</label>
+                                        <input type="text" formControlName="detalle" class="form-control" id="detalle"
+                                            name="detalle">
+                                        <mat-error *ngIf="registroForm.get('detalle')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
+                                    </div>
+                                    <!-- Campo Tipo de Registro -->
+                                    <div class="form-group">
+                                        <label for="tipoRegistro">Tipo de Registro</label>
+                                        <select formControlName="tipoRegistro" class="form-control" id="tipoRegistro"
+                                            name="tipoRegistro">
+                                            <option *ngFor="let tipoRegistro of tipoRegistroOptions"
+                                                [value]="tipoRegistro">{{ tipoRegistro }}</option>
+                                        </select>
+                                        <mat-error *ngIf="registroForm.get('tipoRegistro')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
+                                    </div>
+                                    <!-- Campo Efector -->
+                                    <div class="form-group">
+                                        <label for="efectorCuie">Efector</label>
+                                        <select formControlName="efectorCuie" class="form-control" id="efectorCuie"
+                                            name="efectorCuie">
+                                            <option *ngFor="let efector of efectores"
+                                                [value]="efector.cuie">{{ efector.cuie }} - {{ efector.nombre }}</option>
+                                        </select>
+                                        <mat-error *ngIf="registroForm.get('efectorCuie')?.hasError('required')"
+                                            class="error-message">
+                                            Este campo es obligatorio
+                                        </mat-error>
+                                    </div>
+                                    <!-- Campo Descripción -->
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripción</label>
+                                        <textarea formControlName="descripcion" class="form-control" id="descripcion"
+                                            rows="3" name="descripcion"></textarea>
+                                    </div>
+                                    <!-- Botones de enviar y restablecer -->
+                                    <button type="submit" class="btn btn-primary"
+                                        [disabled]="registroForm.invalid">Enviar</button>
+                                    <button type="button" class="btn btn-secondary" (click)="resetForm()">Restablecer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

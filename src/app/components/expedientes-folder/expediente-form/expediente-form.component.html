@@ -34,15 +34,17 @@
                             </div>
                             <!-- Campo Efector -->
                             <div class="form-group">
-                                <label for="efector">Efector</label>
-                                <select formControlName="efector" class="form-control" id="efector" name="efector"
-                                    required>
+                                <label for="efectorDTO">Efector</label>
+                                <select formControlName="efectorDTO" class="form-control" id="efectorDTO"
+                                    name="efectorDTO" required>
+                                    <option disabled [selected]="!expedienteForm.get('efectorDTO')?.value">Selecciona un
+                                        efector</option>
                                     <option *ngFor="let ef of efectores" [value]="ef.cuie"
-                                        [attr.selected]="(expediente.efector.id === ef.id) ? true : null">
-                                        {{ ef.cuie }} - {{ef.nombre}}
+                                        [selected]="ef.cuie === expedienteForm.get('efectorDTO')?.value">
+                                        {{ ef.cuie }} - {{ ef.nombre }}
                                     </option>
                                 </select>
-                                <mat-error *ngIf="expedienteForm.get('efector')?.hasError('required')"
+                                <mat-error *ngIf="expedienteForm.get('efectorDTO')?.hasError('required')"
                                     class="error-message">
                                     Este campo es obligatorio
                                 </mat-error>

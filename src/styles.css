@@ -216,6 +216,15 @@
     color: #474747 !important;
 }
 
+.table.select-table tr td:first-child,
+.table.select-table th:first-child{
+    padding: 1rem;
+}
+.table.select-table tr td:last-child,
+.table.select-table th:last-child{
+    text-align: center;
+    align-content: center;
+}
 /* Estilos para paginacion*/
 .pagination {
     display: flex;
@@ -235,26 +244,7 @@
     color: #fff;
 }
 
-/* LOADER CSS */
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
-}
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 /* mensaje de error en formulario CSS*/
 
@@ -279,3 +269,47 @@
     background-color: rgba(255, 0, 0, 0.8); /* Color rojo claro */
 }
 
+/* LOADER CSS */
+.spinner-container {
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px; /* Espacio entre el spinner y el texto */
+}
+
+.loading-message {
+    text-align: center;
+    font-size: small;
+    font-weight: 300;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.table-responsive{
+    margin-top: 10px;
+}
+
+.spinner-left{
+    .spinner-container {
+        display: flex;
+        align-items: center; 
+        justify-content: left; 
+    }
+}

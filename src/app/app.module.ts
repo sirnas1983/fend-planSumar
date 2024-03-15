@@ -31,6 +31,11 @@ import { ExpedienteFormComponent } from './components/expedientes-folder/expedie
 import { ResolucionFormComponent } from './components/resoluciones-folder/resolucion-form/resolucion-form.component';
 import { FechaFormatoPipe } from './pipes/fecha-formato.pipe';
 import { ResolucionDetalleComponent } from './components/resoluciones-folder/resolucion-detalle/resolucion-detalle.component';
+import { ResolucionesTableComponent } from './components/resoluciones-folder/resoluciones-table/resoluciones-table.component';
+import { RegistrosFormComponent } from './components/registros-folder/registros-form/registros-form.component';
+import { SpinnerComponent } from './components/utils/spinner/spinner.component';
+import { UsuariosFormComponent } from './components/usuarios-folder/usuarios-form/usuarios-form.component';
+import { UsuariosDetalleComponent } from './components/usuarios-folder/usuarios-detalle/usuarios-detalle.component';
 
 registerLocaleData(localeEs);
 @NgModule({
@@ -38,20 +43,26 @@ registerLocaleData(localeEs);
     AppComponent,
 
     LoginComponent,
-    UsuariosComponent,
     WelcomeScreenComponent,
+    SpinnerComponent,
+
+    UsuariosComponent,
+    UsuariosFormComponent,
+    UsuariosDetalleComponent,
 
     DashboardComponent,
 
     ResolucionesComponent,
     ResolucionFormComponent,
     ResolucionDetalleComponent,
+    ResolucionesTableComponent,
 
     EfectoresComponent,
     EfectorFormComponent,
     EfectorDetalleComponent,
 
     RegistrosComponent,
+    RegistrosFormComponent,
 
     ExpedientesComponent,
     ExpedientesTableComponent,

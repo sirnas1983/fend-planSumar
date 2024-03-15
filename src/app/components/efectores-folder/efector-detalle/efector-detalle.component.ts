@@ -9,17 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./efector-detalle.component.css']
 })
 export class EfectorDetalleComponent implements OnInit {
-  currentEfector: any;
-  showRegistros: boolean = false;
-  showExpedientes: boolean = false;
-  showResoluciones: boolean = false;
+  currentEfector!: any;
+  showRegistros: boolean;
+  showExpedientes: boolean;
+  showResoluciones: boolean;
 
-  constructor(private efectorService: EfectorDataService, private router: Router) { }
+  constructor(private efectorService: EfectorDataService, private router: Router) {
+    this.showRegistros = false;
+    this.showExpedientes = false;
+    this.showResoluciones = false;
+   }
 
   ngOnInit(): void {
-    // Suscripción al observable currentEfector
-    this.efectorService.currentEfector.subscribe(efector => {
+      this.efectorService.currentEfector.subscribe(efector => {
       this.currentEfector = efector;
+      console.log(this.currentEfector);
     });
   }
 

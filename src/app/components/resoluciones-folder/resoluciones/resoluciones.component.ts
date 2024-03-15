@@ -3,6 +3,8 @@ import { Resolucion } from '../../../interfaces/resolucion';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ResolucionDataService } from '../../../services/resolucion-data.service';
+import { API_RESOLUCIONES } from '../../../constants/constants';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-resoluciones',
@@ -17,7 +19,7 @@ export class ResolucionesComponent implements OnInit {
   isAdmin: boolean = false;
   isLoading: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private resolucionData: ResolucionDataService) { }
+  constructor(private apiService : ApiService, private router: Router, private authService: AuthService, private resolucionData: ResolucionDataService) { }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
@@ -51,6 +53,8 @@ export class ResolucionesComponent implements OnInit {
         (item.numero && item.numero.toLowerCase().includes(busqueda)) ||
         (item.nombre && item.nombre.toLowerCase().includes(busqueda)) ||
         (item.descripcion && item.descripcion.toLowerCase().includes(busqueda)) ||
+        (item.expedienteDTO.efectorDTO && item.expedienteDTO.efectorDTO.cuie.toLowerCase().includes(busqueda)) ||
+        (item.expedienteDTO.efectorDTO && item.expedienteDTO.efectorDTO.nombre.toLowerCase().includes(busqueda)) ||
         (item.expedienteDTO && item.expedienteDTO.nombre && item.expedienteDTO.nombre.toLowerCase().includes(busqueda))
       );
     }
@@ -64,6 +68,12 @@ export class ResolucionesComponent implements OnInit {
   editarResolucion(resolucion: Resolucion) {
     this.resolucionData.changeResolucion(resolucion);
     this.router.navigateByUrl('/dashboard/resoluciones/modificar');
+  }
+
+  borrarExpediente(resolucion: Resolucion) {
+    this.apiService.deleteData(API_RESOLUCIONES, resolucion).subscribe(data => {
+      console.log(data);
+    })
   }
 
 }

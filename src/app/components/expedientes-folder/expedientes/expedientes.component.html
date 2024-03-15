@@ -32,8 +32,8 @@
                                         </div>
                                     </div>
                                     <div class="table-responsive  mt-1">
-                                        <table class="table">
-                                            <thead>
+                                        <table class="table select-table">
+                                            <thead class="table-dark">
                                                 <tr>
                                                     <th>Número</th>
                                                     <th>CUIE</th>
@@ -45,16 +45,14 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngIf="isLoading">
-                                                    <td colspan="5">
-                                                        <div class="spinner-container">
-                                                            <div class="loader">
-                                                            </div>
-                                                        </div>
+                                                    <td colspan="6">
+                                                        <app-spinner name="expedientes"></app-spinner>
                                                     </td>
                                                 </tr>
+                                                <td colspan="6" *ngIf="!isLoading && expedientes.length<=0">No se encontraron expedientes</td>
                                                 <tr *ngFor="let expediente of expedientes">
                                                     <td>{{ expediente.numero }}</td>
-                                                    <td>{{ expediente.efector.cuie }}</td>
+                                                    <td>{{ expediente.efectorDTO.cuie }}</td>
                                                     <td>{{ expediente.nombre }}</td>
                                                     <td>{{ expediente.fechaExpediente | fechaFormato }}</td>
                                                     <td>{{ expediente.montoSolicitado | currencyFormat }}</td>
@@ -70,6 +68,11 @@
                                                                     class="btn btn-action btn-primary rounded-circle container"
                                                                     (click)="editarExpediente(expediente)">
                                                                     <i class="fas fa-pencil-alt text-white"></i>
+                                                                </button>
+                                                                <button
+                                                                    class="btn btn-action btn-danger rounded-circle container"
+                                                                    (click)="borrarExpediente(expediente)">
+                                                                    <i class="fas fa-trash-alt text-white"></i>
                                                                 </button>
                                                             </ng-container>
                                                         </div>

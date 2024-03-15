@@ -13,11 +13,9 @@ export class WelcomeScreenComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
   ) {}
 
   ngOnInit(): void {
-    console.log("Component view initialized");
     this.authService.userEmail$.subscribe((data: String) => {
       this.username = data;
     }); 

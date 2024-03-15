@@ -3,6 +3,8 @@ import { Expediente } from '../../../interfaces/expediente';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ExpedienteDataService } from '../../../services/expediente-data.service';
+import { API_EXPEDIENTES } from '../../../constants/constants';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-expedientes',
@@ -17,7 +19,10 @@ export class ExpedientesComponent implements OnInit {
   isAdmin: boolean = false;
   isLoading: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService, private expedienteData: ExpedienteDataService) { }
+  constructor(private router: Router, 
+    private authService: AuthService, 
+    private expedienteData: ExpedienteDataService,
+    private apiService : ApiService) { }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
@@ -30,7 +35,7 @@ export class ExpedientesComponent implements OnInit {
     this.isLoading = true;
     this.expedienteData.updateExpedientes();
     this.expedienteData.currentListaExpediente.subscribe((data: any) => {
-      if (data.length>0) {
+      if (data) {
         this.expedientesOriginal = data;
         this.expedientes = data;
         this.isLoading = false;
@@ -51,7 +56,7 @@ export class ExpedientesComponent implements OnInit {
         (item.numero && item.numero.toLowerCase().includes(busqueda)) ||
         (item.nombre && item.nombre.toLowerCase().includes(busqueda)) ||
         (item.descripcion && item.descripcion.toLowerCase().includes(busqueda)) ||
-        (item.efector.cuie.toLowerCase().includes(busqueda))
+        (item.efectorDTO.cuie.toLowerCase().includes(busqueda))
       );
     }
   }
@@ -59,6 +64,7 @@ export class ExpedientesComponent implements OnInit {
 
   verExpediente(expediente: Expediente) {
     this.expedienteData.changeExpediente(expediente);
+    console.log(expediente);
     this.router.navigateByUrl('/dashboard/expedientes/detalle');
   }
 
@@ -72,7 +78,7 @@ export class ExpedientesComponent implements OnInit {
       id: '',
       nombre: '',
       numero: '',
-      efector: {
+      efectorDTO: {
         id: '',
         nombre: '',
         cuie: '',
@@ -101,6 +107,12 @@ export class ExpedientesComponent implements OnInit {
       descripcion: ''
     }
     this.expedienteData.changeExpediente(expediente);
-    this.router.navigateByUrl('/dashboard/expedientes/modificar');
+    this.router.navigateByUrl('/dashboard/expedientes/crear');
+  }
+
+  borrarExpediente(expediente : Expediente){
+    this.apiService.deleteData(API_EXPEDIENTES, expediente).subscribe( data =>{
+      console.log(data);
+    })
   }
 }

@@ -5,7 +5,7 @@ export interface Expediente {
     id: string;
     nombre: string;
     numero: string;
-    efector: Efector;
+    efectorDTO: Efector;
     montoSolicitado: number;
     fechaExpediente: string;
     auditorDTO: Auditor;

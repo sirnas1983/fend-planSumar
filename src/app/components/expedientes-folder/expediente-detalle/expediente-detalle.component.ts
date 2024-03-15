@@ -29,11 +29,10 @@ export class ExpedienteDetalleComponent implements OnInit {
     // Suscripción al observable currentExpediente
     this.expedienteService.currentExpediente.subscribe(expediente => {
       this.currentExpediente = expediente;
+      console.log(expediente);
       this.endpoint = `resoluciones?numEx=${expediente.numero}`
       this.loadResolucion();
     });
-
-
   }
 
   agregarResolucion() : void{
@@ -58,16 +57,12 @@ export class ExpedienteDetalleComponent implements OnInit {
   loadResolucion(): void {
     this.apiService.fetchData(this.endpoint).subscribe(
       (resolucion: any) => {
-        console.log(resolucion);
         if (resolucion.length > 0) {
           this.resolucion = resolucion[0];
           this.hasExpediente = true; // Verificar si existe expedienteDTO
-        } else {
-          console.error('No se encontró la resolución');
         }
       },
       error => {
-        console.error('Error al cargar la resolución:', error);
       }
     );
   }

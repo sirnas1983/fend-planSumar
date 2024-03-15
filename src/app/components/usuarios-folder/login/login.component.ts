@@ -12,12 +12,13 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   isLoading: boolean = false;
+  finishedLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   login() {
     this.isLoading = true;
@@ -26,18 +27,21 @@ export class LoginComponent {
       password: this.password
     };
     this.authService.login(credentials).subscribe(
-      () => {     
-        setTimeout(() => {
-          this.isLoading=false;
-          this.router.navigate(['/dashboard']); 
-         }, 1750); 
+      data => {
+        if (data.token) {
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1750);
+          this.finishedLoading=true;
+        }
+        this.isLoading = false
       },
       error => {
         this.snackBar.open('Nombre de usuario o contraseña incorrectos', '', {
           duration: 2000,
           panelClass: ['custom-snackbar', 'snackbar-error'],
         });
-        this.isLoading=false;
+        this.isLoading = false;
       }
     );
   }

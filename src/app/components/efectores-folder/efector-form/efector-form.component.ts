@@ -50,7 +50,6 @@ export class EfectorFormComponent {
 
     this.efectorForm.get('id')?.disable();
     this.efectorDataSubscription = this.efectorData.currentEfector.subscribe(data => {
-      console.log(data);
       this.efector = data;
       this.efectorForm.patchValue(data); // Patch the form with received data
     });
@@ -71,12 +70,12 @@ export class EfectorFormComponent {
           .subscribe(
             (data: any) => {
               this.efectorData.updateEfectores();
-              this.resetForm();
+              this.efectorData.changeEfector(this.efector);
               this.isLoading = false;
+              this.resetForm();
               this.location.back();
             },
             error => {
-              console.log("error: ", error);
               this.errorHandlingService.handleHttpError(error);
               this.isLoading = false;
 
@@ -87,8 +86,9 @@ export class EfectorFormComponent {
           .subscribe(
             (data: any) => {
               this.efectorData.updateEfectores();
-              this.resetForm();
+              this.efectorData.changeEfector(this.efector);
               this.isLoading = false;
+              this.resetForm();
               this.location.back();
             },
             error => {
