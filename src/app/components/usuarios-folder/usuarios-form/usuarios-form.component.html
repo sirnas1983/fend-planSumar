@@ -1,1 +1,62 @@
-<p>usuarios-form works!</p>
+<div class="row">
+    <div class="col-lg-12 d-flex flex-column">
+        <div class="row flex-grow">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card card-rounded">
+                    <div class="card-body">
+                        <!-- Aquí va el formulario -->
+                        <form [formGroup]="usuariosForm" (ngSubmit)="onSubmit()">
+                            <h4 class="card-title">Editar Usuario</h4>
+                            <!-- Campo ID -->
+                            <div class="form-group">
+                                <label for="id">ID</label>
+                                <input type="text" formControlName="id" class="form-control" id="id" name="id" readonly>
+                            </div>
+                            <!-- Campo Username -->
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" formControlName="username" class="form-control" id="username"
+                                    name="username" required>
+                            </div>
+                            <!-- Campo Email -->
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" formControlName="email" class="form-control" id="email" name="email"
+                                    required>
+                                <mat-error
+                                    *ngIf="usuariosForm.get('email')?.invalid && usuariosForm.get('email')?.touched"
+                                    class="error-message">
+                                    Por favor, ingrese un email válido
+                                </mat-error>
+                            </div>
+                            <!-- Campo Roles -->
+                            <div class="form-group">
+                                <label for="role">Rol</label>
+                                <select formControlName="role" class="form-control" id="role" name="role" required>
+                                    <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                                </select>
+                                <mat-error *ngIf="usuariosForm.get('role')?.hasError('required')" class="error-message">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </div>
+                            <!-- Campo Validado -->
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" formControlName="validated" id="validated">
+                                <label class="form-check-label ms-2">Validado</label>
+                            </div>
+                            <!-- Campo Desbloqueado -->
+                            <div class="form-group">
+                                <input class="form-check-input" type="checkbox" formControlName="unlocked" id="unlocked">
+                                <label class="form-check-label ms-2">Desbloqueado</label>
+                            </div>
+                            <!-- Botones de enviar y restablecer -->
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="usuariosForm.invalid || isLoading">Enviar</button>
+                            <button type="button" class="btn btn-secondary" [disabled]="isLoading" (click)="resetForm()">Restablecer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

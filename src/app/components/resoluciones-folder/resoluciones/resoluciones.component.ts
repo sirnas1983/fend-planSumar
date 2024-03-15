@@ -29,14 +29,14 @@ export class ResolucionesComponent implements OnInit {
   }
 
   fetchData(): void {
-    this.isLoading = true; // Activamos el loader al iniciar la carga de datos
+    this.isLoading = true; 
     this.resolucionData.updateResoluciones();
     this.resolucionData.currentListaResoluciones.subscribe((data: Resolucion[] | null) => {
       if (data) {
         this.resolucionesOriginal = data;
         this.resoluciones = this.resolucionesOriginal;
+        this.isLoading = false;
       }
-      this.isLoading = false; // Desactivamos el loader cuando se hayan cargado los datos
     });
   }
 

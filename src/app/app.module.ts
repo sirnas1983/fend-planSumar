@@ -36,6 +36,7 @@ import { RegistrosFormComponent } from './components/registros-folder/registros-
 import { SpinnerComponent } from './components/utils/spinner/spinner.component';
 import { UsuariosFormComponent } from './components/usuarios-folder/usuarios-form/usuarios-form.component';
 import { UsuariosDetalleComponent } from './components/usuarios-folder/usuarios-detalle/usuarios-detalle.component';
+import { AuthenticationUserFormComponent } from './components/usuarios-folder/authentication-user-form/authentication-user-form.component';
 
 registerLocaleData(localeEs);
 @NgModule({
@@ -49,6 +50,7 @@ registerLocaleData(localeEs);
     UsuariosComponent,
     UsuariosFormComponent,
     UsuariosDetalleComponent,
+    AuthenticationUserFormComponent,
 
     DashboardComponent,
 

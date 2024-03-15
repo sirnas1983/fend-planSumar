@@ -17,6 +17,7 @@ import { ResolucionDetalleComponent } from './components/resoluciones-folder/res
 import { RegistrosFormComponent } from './components/registros-folder/registros-form/registros-form.component';
 import { UsuariosFormComponent } from './components/usuarios-folder/usuarios-form/usuarios-form.component';
 import { UsuariosDetalleComponent } from './components/usuarios-folder/usuarios-detalle/usuarios-detalle.component';
+import { AuthenticationUserFormComponent } from './components/usuarios-folder/authentication-user-form/authentication-user-form.component';
 
 
 const routes: Routes = [
@@ -54,7 +55,7 @@ const routes: Routes = [
       {
         path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuard], title: 'Usuarios', children:
           [
-            { path: 'crear', component: UsuariosFormComponent, title: 'Crear Usuario' },
+            { path: 'crear', component: AuthenticationUserFormComponent, title: 'Crear Usuario' },
             { path: 'modificar', component: UsuariosFormComponent, title: 'Editar Usuario' },
             { path: 'detalle', component: UsuariosDetalleComponent, title: 'Detalle de Usuario' },
 

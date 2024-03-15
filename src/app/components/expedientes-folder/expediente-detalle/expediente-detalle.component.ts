@@ -5,6 +5,7 @@ import { Resolucion } from '../../../interfaces/resolucion';
 import { Expediente } from '../../../interfaces/expediente';
 import { Router } from '@angular/router';
 import { ResolucionDataService } from '../../../services/resolucion-data.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-expediente-detalle',
@@ -19,11 +20,15 @@ export class ExpedienteDetalleComponent implements OnInit {
   endpoint: string = '';
   resolucion!: Resolucion;
   hasExpediente: boolean = false;
+  isAdmin!: boolean;
 
   constructor(private expedienteService: ExpedienteDataService, 
     private apiService: ApiService, 
     private router:Router,
-    private resolucionData: ResolucionDataService) { }
+    private resolucionData: ResolucionDataService,
+    private authService : AuthService) {
+      this.authService.isAdmin$.subscribe(data=> this.isAdmin = data)
+     }
 
   ngOnInit(): void {
     // Suscripción al observable currentExpediente

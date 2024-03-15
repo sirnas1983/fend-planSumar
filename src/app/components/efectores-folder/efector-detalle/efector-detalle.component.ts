@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EfectorDataService } from '../../../services/efector-data.service';
 import { Efector } from '../../../interfaces/efector';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-efector-detalle',
@@ -13,11 +14,13 @@ export class EfectorDetalleComponent implements OnInit {
   showRegistros: boolean;
   showExpedientes: boolean;
   showResoluciones: boolean;
+  isAdmin! : boolean;
 
-  constructor(private efectorService: EfectorDataService, private router: Router) {
+  constructor(private efectorService: EfectorDataService, private router: Router, private authService:AuthService) {
     this.showRegistros = false;
     this.showExpedientes = false;
     this.showResoluciones = false;
+    this.authService.isAdmin$.subscribe(data=>this.isAdmin=data)
    }
 
   ngOnInit(): void {

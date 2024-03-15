@@ -25,9 +25,9 @@
                                             <!-- FIN DE BUSQUEDA -->
                                         </div>
                                     </div>
-                                    <div class="table-responsive mt-1">
-                                        <table class="table">
-                                            <thead>
+                                    <div class="table-responsive  mt-1">
+                                        <table class="table select-table">
+                                            <thead class="table-dark">
                                                 <tr>
                                                     <th>Número</th>
                                                     <th>Fecha</th>
@@ -41,11 +41,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngIf="isLoading">
-                                                    <td colspan="6">
-                                                        <div class="spinner-container">
-                                                            <div class="loader"></div>
-                                                        </div>
+                                                    <td colspan="7">
+                                                        <app-spinner name="resoluciones"></app-spinner>
                                                     </td>
+                                                </tr>
+                                                <tr *ngIf="!isLoading && resoluciones.length===0">
+                                                    <td colspan="7">No se encontraron resoluciones</td>
                                                 </tr>
                                                 <tr *ngFor="let resolucion of resoluciones"
                                                     [class]="{'table-danger': resolucion.expedienteDTO.montoSolicitado !== resolucion.montoOtorgado}">

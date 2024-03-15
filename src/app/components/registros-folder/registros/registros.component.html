@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="d-flex justify-content-between align-items-center">
             <h4 class="mb-0">Registros Contables</h4>
-            <button class="btn btn-primary btn-lg text-white mb-0 me-3 d-flex align-items-center"
+            <button *ngIf="isAdmin" class="btn btn-primary btn-lg text-white mb-0 me-3 d-flex align-items-center"
                 (click)="agregarRegistro()">
                 <i class="mdi mdi-plus me-1"></i>
                 Agregar
@@ -23,12 +23,12 @@
                 </thead>
                 <tbody>
                     <tr *ngIf="isLoading">
-                        <td colspan="5">
+                        <td [attr.colspan]="isAdmin ? 5 : 4">
                             <app-spinner *ngIf="isLoading" name="registros"></app-spinner>
                         </td>
                     </tr>
                     <tr *ngIf="registros.length===0 && !isLoading">
-                        <td colspan="5">No se encontraron registros para este efector</td>
+                        <td [attr.colspan]="isAdmin ? 5 : 4">No se encontraron registros para este efector</td>
                     </tr>
                     <tr *ngFor="let registro of registros">
                         <td>{{ registro.fecha | fechaFormato }}</td>
@@ -37,14 +37,12 @@
                         <td *ngIf="registro.tipoRegistro === 'DEBE'"></td>
                         <td *ngIf="registro.tipoRegistro === 'DEBE'">{{ registro.monto | currencyFormat }}</td>
                         <td *ngIf="registro.tipoRegistro === 'HABER'"></td>
-                        <td>
+                        <td *ngIf="isAdmin">
                             <div class="btn-group me-3" role="group" aria-label="Acciones">
-                                <ng-container *ngIf="isAdmin">
-                                    <button class="btn btn-action btn-primary rounded-circle container"
-                                        (click)="editarRegistro(registro)">
-                                        <i class="fas fa-pencil-alt text-white"></i>
-                                    </button>
-                                </ng-container>
+                                <button class="btn btn-action btn-primary rounded-circle container"
+                                    (click)="editarRegistro(registro)">
+                                    <i class="fas fa-pencil-alt text-white"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>

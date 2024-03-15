@@ -10,14 +10,14 @@ export class ErrorHandlingService {
 
   handleHttpError(error: any): void {
     if (error.status != 200 && error.status != 404) {
-      this.showSnackbar(`Recurso no encontrado`);
+      this.showSnackbar(error.error.message);
     }
   }
 
   private showSnackbar(message: string): void {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
-      panelClass: 'error-snackbar'
+      panelClass: 'snackbar-error'
     });
   }
 }

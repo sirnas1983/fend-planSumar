@@ -5,7 +5,7 @@ import { AuthService } from '../../../services/auth.service';
 import { UsuarioDataService } from '../../../services/usuario-data.service';
 
 @Component({
-  selector: 'app-usuarios',
+  selector: 'app-usuario',
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })
@@ -39,17 +39,16 @@ export class UsuariosComponent {
   }
 
   isRouteActive(): boolean {
-    return this.router.url === '/dashboard/efectores';
+    return this.router.url === '/dashboard/usuarios';
   }
 
   filtrarLista(event: any): void {
     const busqueda = (event.target as HTMLInputElement)?.value.trim().toLowerCase();
     if (busqueda === '') {
-      this.usuarios = this.usuarios;
+      this.usuarios = this.usuariosOriginal;
     } else {
       this.usuarios = this.usuariosOriginal.filter(item =>
-        item.email.toLowerCase().includes(busqueda.toLowerCase()) ||
-        item.nombre.toLowerCase().includes(busqueda.toLowerCase()) 
+        item.email.toLowerCase().includes(busqueda.toLowerCase()) 
       );
     }
   }
@@ -69,10 +68,13 @@ export class UsuariosComponent {
   agregarUsuario() {
     const usuario: Usuario = {
       id: '',
-      nombre: '',
       email: '',
-      roles: []
-         }
+      roles: [],
+      username: '',
+      validated: true,
+      unlocked: true,
+      lastLoginDate: ''
+    }
     this.usuarioData.changeUsuario(usuario);
     this.router.navigateByUrl('/dashboard/usuarios/crear');
   }

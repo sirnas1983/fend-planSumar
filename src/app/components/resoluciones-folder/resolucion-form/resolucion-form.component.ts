@@ -1,14 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { ApiService } from '../../../services/api.service';
 import { ErrorHandlingService } from '../../../services/error-handling.service';
 import { Expediente } from '../../../interfaces/expediente';
 import { Resolucion } from '../../../interfaces/resolucion';
 import { ResolucionDataService } from '../../../services/resolucion-data.service';
 import { ExpedienteDataService } from '../../../services/expediente-data.service';
-import { API_EXPEDIENTES } from '../../../constants/constants';
+import { API_RESOLUCIONES } from '../../../constants/constants';
 
 @Component({
   selector: 'app-resolucion-form',
@@ -17,7 +16,7 @@ import { API_EXPEDIENTES } from '../../../constants/constants';
 })
 export class ResolucionFormComponent implements OnInit {
 
-  endpoint: string = 'resoluciones';
+  endpoint: string = API_RESOLUCIONES;
   resolucion!: Resolucion;
   isLoading: boolean = false;
   expedientes: Expediente[] = [];

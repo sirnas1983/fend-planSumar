@@ -1,1 +1,42 @@
-<p>usuarios-detalle works!</p>
+<div class="tab-content tab-content-basic">
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-column">
+                <div class="row flex-grow">
+                    <div class="col-12 grid-margin stretch-card">
+                        <div class="card card-rounded">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="title">Usuario:  {{ currentUsuario.email.toLowerCase() || ''}} </h5>
+                                </div>
+                                <button class="btn btn-action btn-primary rounded-circle container"
+                                    (click)="editarUsuario(currentUsuario)">
+                                    <i class="fas fa-pencil-alt text-white"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <!-- Detalles del usuario -->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <p><strong>Roles:</strong> {{ currentUsuario.roles }}</p>
+                                        <p><strong>Último inicio de sesión:</strong> {{ currentUsuario.lastLoginDate |
+                                            fechaFormato }}
+                                        </p>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Validado:</strong> {{ currentUsuario.validated ? 'Sí' : 'No' }}</p>
+                                        <p><strong>Desbloqueado:</strong> {{ currentUsuario.unlocked ? 'Sí' : 'No' }}
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <!-- Fin de Detalles del usuario -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

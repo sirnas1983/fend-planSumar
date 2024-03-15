@@ -17,18 +17,18 @@ export class UsuarioDataService {
 
   constructor(private apiService: ApiService) { }
 
-  changeUsuario(usuario: Usuario | null) {
+  changeUsuario(usuario: Usuario) {
     this.usuarioSource.next(usuario);
   }
 
-  changeListaUsuarios(listaUsuarios: Usuario[] | null) {
+  changeListaUsuarios(listaUsuarios: Usuario[]) {
     this.listaUsuariosSource.next(listaUsuarios);
   }
 
   updateUsuarios() {
     this.apiService.fetchData(API_USUARIOS).subscribe(
       (data: any) => {
-        this.changeListaUsuarios(data);
+        this.changeListaUsuarios(data.data);
       },
       error => {
         console.error('Error al actualizar usuarios:', error);
@@ -37,6 +37,7 @@ export class UsuarioDataService {
   }
 
   fetchUsuarioById(id : string){
-    return this.apiService.fetchData(`${API_USUARIOS}?id=${id}`);
+    this.apiService.fetchData(`${API_USUARIOS}?id=${id}`).subscribe((data:any)=>
+      this.changeUsuario(data.data));
   }
 }

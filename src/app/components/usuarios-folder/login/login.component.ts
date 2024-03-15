@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorHandlingService } from '../../../services/error-handling.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private errorHandler: ErrorHandlingService
   ) { }
 
   login() {
@@ -37,10 +38,8 @@ export class LoginComponent {
         this.isLoading = false
       },
       error => {
-        this.snackBar.open('Nombre de usuario o contraseña incorrectos', '', {
-          duration: 2000,
-          panelClass: ['custom-snackbar', 'snackbar-error'],
-        });
+        console.log(error)
+        this.errorHandler.handleHttpError(error);
         this.isLoading = false;
       }
     );

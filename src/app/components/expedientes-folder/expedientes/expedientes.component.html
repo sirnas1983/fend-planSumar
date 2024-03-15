@@ -49,7 +49,9 @@
                                                         <app-spinner name="expedientes"></app-spinner>
                                                     </td>
                                                 </tr>
-                                                <td colspan="6" *ngIf="!isLoading && expedientes.length<=0">No se encontraron expedientes</td>
+                                                <tr *ngIf="!isLoading && expedientes.length<=0">
+                                                    <td colspan="6">No se encontraron expedientes</td>
+                                                </tr>
                                                 <tr *ngFor="let expediente of expedientes">
                                                     <td>{{ expediente.numero }}</td>
                                                     <td>{{ expediente.efectorDTO.cuie }}</td>

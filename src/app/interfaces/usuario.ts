@@ -1,6 +1,11 @@
+import { Auditor } from "./auditor";
+
 export interface Usuario {
-    email: string;
-    roles: string[];
-    id: string;
-    nombre: string;
-  }
+  id: string;
+  username: string;
+  email: string;
+  roles: string[];
+  validated: boolean;
+  unlocked: boolean;
+  lastLoginDate: string;
+}

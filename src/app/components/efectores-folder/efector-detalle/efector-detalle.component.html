@@ -8,7 +8,7 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Nombre: {{ currentEfector.nombre || ''}} - {{ currentEfector.cuie
                                     || '' }}</h5>
-                                <button class="btn btn-action btn-primary rounded-circle container"
+                                <button *ngIf="isAdmin" class="btn btn-action btn-primary rounded-circle container"
                                     (click)="editarEfector(currentEfector)">
                                     <i class="fas fa-pencil-alt text-white"></i>
                                 </button>
