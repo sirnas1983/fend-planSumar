@@ -79,7 +79,7 @@
                                     </div>
                                     <!-- Botones de enviar y restablecer -->
                                     <button type="submit" class="btn btn-primary"
-                                        [disabled]="registroForm.invalid">
+                                        [disabled]="registroForm.invalid || isLoading">
                                         <span *ngIf="!isLoading">Enviar</span>
                                         <app-spinner name="" *ngIf="isLoading"></app-spinner>
                                     </button>

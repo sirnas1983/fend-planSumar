@@ -352,3 +352,9 @@ margin-right: 10px;
     cursor: pointer;
 }
 
+.sidebar{
+    z-index: 800;
+}
+
+
+
