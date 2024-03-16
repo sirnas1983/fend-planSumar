@@ -23,14 +23,21 @@
                                     currencyFormat }}</p>
                                 <p><strong>Descripción:</strong> {{ currentExpediente.descripcion }}</p>
                             </div>
-                            <div class="col-md-6">
-                                <p><strong>Fecha de Creación:</strong> {{ currentExpediente.auditorDTO.fechaCreacion |
-                                    fechaFormato }}</p>
-                                <p><strong>Creado Por:</strong> {{ currentExpediente.auditorDTO.creadoPor }}</p>
-                                <p><strong>Fecha de Modificación:</strong> {{
-                                    currentExpediente.auditorDTO.fechaModificacion | fechaFormato }}</p>
-                                <p><strong>Modificado Por:</strong> {{ currentExpediente.auditorDTO.modificadoPor }}</p>
-                            </div>
+                            <ng-container *ngIf="currentExpediente.auditorDTO">
+                                <div class="col-md-6">
+                                    <p><strong>Fecha de Creación:</strong> {{ currentExpediente.auditorDTO.fechaCreacion
+                                        |
+                                        fechaFormato }}</p>
+                                    <p><strong>Creado Por:</strong> {{ currentExpediente.auditorDTO.creadoPor }}</p>
+                                    <p><strong>Fecha de Modificación:</strong> {{
+                                        currentExpediente.auditorDTO.fechaModificacion | fechaFormato }}</p>
+                                    <p><strong>Modificado Por:</strong> {{ currentExpediente.auditorDTO.modificadoPor }}
+                                    </p>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngIf="!currentExpediente.auditorDTO">
+                                <app-spinner name="" class="spinner-left"></app-spinner>
+                            </ng-container>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12">
@@ -75,4 +82,4 @@
         </div>
     </div>
     <!-- Manejo de caso en el que currentExpediente aún no se ha inicializado -->
-  </div>
+</div>

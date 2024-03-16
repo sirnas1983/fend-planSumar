@@ -3,6 +3,7 @@ import { Efector } from '../../../interfaces/efector';
 import { AuthService } from '../../../services/auth.service';
 import { EfectorDataService } from '../../../services/efector-data.service';
 import { Router } from '@angular/router';
+import { FixedSizeVirtualScrollStrategy } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-efectores',
@@ -15,22 +16,20 @@ export class EfectoresComponent implements OnInit {
   efectoresOriginal: Efector[] = [];
   efectores: Efector[] = [];
   isAdmin: boolean = false;
-  isLoading: boolean;
+  isLoading: boolean = false;
 
   constructor(private router: Router,
     private authService: AuthService,
     private efectorData: EfectorDataService,
     ) { 
-      this.isLoading=true;
     }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((data: boolean) => {
       this.isAdmin = data;
     });
-    console.log(this.isLoading);
     this.efectorData.updateEfectores();
-    this.efectorData.currentListaEfectores.subscribe((data: Efector[]) => {
+    this.efectorData.currentListaEfectores.subscribe((data: any) => {
       this.isLoading = true;
       if (data) {
         this.efectoresOriginal = data;

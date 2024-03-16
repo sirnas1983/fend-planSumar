@@ -59,7 +59,10 @@
                                     </div>
                                     <!-- Botones de enviar y restablecer -->
                                     <button type="submit" class="btn btn-primary"
-                                        [disabled]="efectorForm.invalid || isLoading">Enviar</button>
+                                        [disabled]="efectorForm.invalid || isLoading">
+                                        <span *ngIf="!isLoading">Enviar</span>
+                                        <app-spinner name="" *ngIf="isLoading"></app-spinner>
+                                    </button>
                                     <button type="button" class="btn btn-secondary" (click)="resetForm()"
                                         [disabled]="isLoading">Restablecer</button>
                                 </form>

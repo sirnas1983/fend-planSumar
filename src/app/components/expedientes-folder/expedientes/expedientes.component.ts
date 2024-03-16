@@ -112,7 +112,9 @@ export class ExpedientesComponent implements OnInit {
 
   borrarExpediente(expediente : Expediente){
     this.apiService.deleteData(API_EXPEDIENTES, expediente).subscribe( data =>{
-      console.log(data);
+      if(data){
+        this.expedienteData.updateExpedientes();
+      }
     })
   }
 }

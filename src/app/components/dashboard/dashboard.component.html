@@ -1,65 +1,24 @@
 <div class="container-scroller">
-
     <!-- NAVBAR SUPERIOR -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
-        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-            <div class="me-3">
-                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-                    <span class="icon-menu"></span>
-                </button>
-            </div>
-            <div>
-                <span class="navbar-brand brand-logo">
-                    <img src="../../../assets/images/logoPlanSumar.jpeg" alt="logo" />
-                </span>
-                <a class="navbar-brand brand-logo-mini" href="#">
-                    <img src="../../../assets/images/logoPlanSumar.jpeg" alt="logo" />
-                </a>
-            </div>
-        </div>
-        <!-- BIENVENIDA Y NOMBRE -->
         <div class="navbar-menu-wrapper d-flex align-items-top">
+            <ul class="navbar-nav">
+                <span class="navbar-img-container">
+                    <img src="../../../assets/images/logoPlanSumar.jpeg" class="navbar-img-img" alt="logo" />
+                </span>
+            </ul>
             <ul class="navbar-nav">
                 <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
                     <h1 class="welcome-text">HOLA <span class="text-black fw-bold"></span></h1>
                     <h3 class="welcome-sub-text">{{username}}</h3>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto">
-
-                <!-- MENU DESPLEGABLE USUARIO -->
-                <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="img-xs rounded-circle" src="../../../assets/images/iconoUsuario.webp"
-                            alt="Profile image">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                        <div class="dropdown-header text-center">
-                            <img class="img-md rounded-circle" style="height: 50px;"
-                                src="../../../assets/images/iconoUsuario.webp" alt="Profile image">
-                            <p class="mb-1 mt-3 font-weight-semibold">{{username}}</p>
-                            <p class="fw-light text-muted mb-0">{{rol}}</p>
-                        </div>
-                        <a class="dropdown-item"><i
-                                class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Mi perfil
-                            <span class="badge badge-pill badge-danger">1</span></a>
-                        <a class="dropdown-item" (click)="cerrarSesion()"><i
-                                class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Cerrar Sesion</a>
-                    </div>
-                </li>
-                <!-- FIN DE MENU USUARIO -->
-            </ul>
-            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                data-bs-toggle="offcanvas">
-                <span class="mdi mdi-menu"></span>
-            </button>
         </div>
-        <!-- FIN DE BIENVENIDA Y NOMBRE  -->
     </nav>
     <!-- FIN DE NAVBAR SUPERIOR -->
     <!-- CUERPO PRINCIPAL -->
     <div class="container-fluid page-body-wrapper">
-        <!-- CONFIGURACION -->
+        <!-- CONFIGURACION COLORES -->
         <div class="theme-setting-wrapper">
             <div id="settings-trigger"><i class="ti-settings"></i></div>
             <div id="theme-settings" class="settings-panel">
@@ -84,37 +43,44 @@
         </div>
         <!-- FIN DE CONFIGURACION -->
         <!-- SIDEBAR -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <nav class="sidebar" id="sidebar">
             <ul class="nav">
                 <li class="nav-item nav-category">Secciones</li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                        aria-controls="ui-basic">
-                        <i class="menu-icon mdi mdi-floor-plan"></i>
-                        <span class="menu-title">SECCIONES</span>
-                        <i class="menu-arrow"></i>
+                <li class="nav-item" (click)="navigateTo('/dashboard/efectores', 'efectores')">
+                    <a class="nav-link">
+                        <span class="fas fa-hospital navbar-icon me-2"></span>
+                        <span class="menu-title">Efectores</span>
                     </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="#">Efectores</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="#">>Expedientes</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="#">>Resoluciones</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="#">>Usuarios</a></li>
-                            <li class="nav-item"> <a class="nav-link"
-                                    href="#">>...</a></li>
-                        </ul>
-                    </div>
                 </li>
-
-                <li class="nav-item nav-category">help</li>
+                <li class="nav-item" (click)="navigateTo('/dashboard/expedientes', 'expedientes')">
+                    <a class="nav-link">
+                        <span class="fas fa-file navbar-icon me-2"></span>
+                        <span class="menu-title">Expedientes</span>
+                    </a>
+                </li>
+                <li class="nav-item" (click)="navigateTo('/dashboard/resoluciones', 'resoluciones')">
+                    <a class="nav-link">
+                        <span class="fas fa-file-alt navbar-icon me-2"></span>
+                        <span class="menu-title">Resoluciones</span>
+                    </a>
+                </li>
+                <li class="nav-item" (click)="navigateTo('/dashboard/usuarios', 'usuarios')">
+                    <a class="nav-link">
+                        <span class="fas fa-users navbar-icon me-2"></span>
+                        <span class="menu-title">Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item nav-category">AYUDA</li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="menu-icon mdi mdi-file-document"></i>
-                        <span class="menu-title">Documentation</span>
+                    <a class="nav-link">
+                        <span class="menu-icon mdi mdi-file-document navbar-icon"></span>
+                        <span class="menu-title">Documentacion</span>
+                    </a>
+                </li>
+                <li class="nav-item" (click)="cerrarSesion()">
+                    <a class="nav-link">
+                        <span class="fas fa-user navbar-icon me-2"></span>
+                        <span class="menu-title">Cerrar Sesion</span>
                     </a>
                 </li>
             </ul>
@@ -129,37 +95,34 @@
                         </div>
                         <div class="icon-container" *ngIf="isRouteActive()">
                             <div class="icons">
-                                <div class="icon" [routerLink]="'/dashboard/efectores'">
+                                <div class="icon" (click)="navigateTo('/dashboard/efectores', 'efectores')">
                                     <i class="grande fas fa-hospital"></i>
                                     <span>Efectores</span>
                                 </div>
-                                <div class="icon" [routerLink]="'/dashboard/expedientes'">
+                                <div class="icon" (click)="navigateTo('/dashboard/expedientes', 'expedientes')">
                                     <i class="grande fas fa-file"></i>
                                     <span>Expedientes</span>
                                 </div>
-                                <div class="icon" [routerLink]="'/dashboard/resoluciones'">
+                                <div class="icon" (click)="navigateTo('/dashboard/resoluciones', 'resoluciones')">
                                     <i class="grande fas fa-file-alt"></i>
                                     <span>Resoluciones</span>
                                 </div>
-                                <div class="icon" [routerLink]="'/dashboard/usuarios'">
+                                <div class="icon" (click)="navigateTo('/dashboard/usuarios', 'usuarios')">
                                     <i class="grande fas fa-users"></i>
                                     <span>Usuarios</span>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
-
             <!-- FOOTER -->
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a
-                            href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from
-                        BootstrapDash.</span>
-                    <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights
-                        reserved.</span>
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Pagina creada por <a
+                            href="https://www.linkedin.com/in/dahiebl" target="_blank">dahiebl</a></span>
+                    <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. Todos los
+                        derechos reservados.</span>
                 </div>
             </footer>
             <!-- FIN FOOTER -->

@@ -63,8 +63,8 @@
                                         <label for="efectorCuie">Efector</label>
                                         <select formControlName="efectorCuie" class="form-control" id="efectorCuie"
                                             name="efectorCuie">
-                                            <option *ngFor="let efector of efectores"
-                                                [value]="efector.cuie">{{ efector.cuie }} - {{ efector.nombre }}</option>
+                                            <option *ngFor="let efector of efectores" [value]="efector.cuie">{{
+                                                efector.cuie }} - {{ efector.nombre }}</option>
                                         </select>
                                         <mat-error *ngIf="registroForm.get('efectorCuie')?.hasError('required')"
                                             class="error-message">
@@ -79,8 +79,12 @@
                                     </div>
                                     <!-- Botones de enviar y restablecer -->
                                     <button type="submit" class="btn btn-primary"
-                                        [disabled]="registroForm.invalid">Enviar</button>
-                                    <button type="button" class="btn btn-secondary" (click)="resetForm()">Restablecer</button>
+                                        [disabled]="registroForm.invalid">
+                                        <span *ngIf="!isLoading">Enviar</span>
+                                        <app-spinner name="" *ngIf="isLoading"></app-spinner>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary"
+                                        (click)="resetForm()">Restablecer</button>
                                 </form>
                             </div>
                         </div>

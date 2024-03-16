@@ -41,18 +41,24 @@
                             </div>
                             <!-- Campo Validado -->
                             <div class="form-group">
-                                <input class="form-check-input" type="checkbox" formControlName="validated" id="validated">
+                                <input class="form-check-input" type="checkbox" formControlName="validated"
+                                    id="validated">
                                 <label class="form-check-label ms-2">Validado</label>
                             </div>
                             <!-- Campo Desbloqueado -->
                             <div class="form-group">
-                                <input class="form-check-input" type="checkbox" formControlName="unlocked" id="unlocked">
+                                <input class="form-check-input" type="checkbox" formControlName="unlocked"
+                                    id="unlocked">
                                 <label class="form-check-label ms-2">Desbloqueado</label>
                             </div>
                             <!-- Botones de enviar y restablecer -->
                             <button type="submit" class="btn btn-primary"
-                                [disabled]="usuariosForm.invalid || isLoading">Enviar</button>
-                            <button type="button" class="btn btn-secondary" [disabled]="isLoading" (click)="resetForm()">Restablecer</button>
+                                [disabled]="usuariosForm.invalid || isLoading">
+                                <span *ngIf="!isLoading">Enviar</span>
+                                <app-spinner name="" *ngIf="isLoading"></app-spinner>
+                            </button>
+                            <button type="button" class="btn btn-secondary" [disabled]="isLoading"
+                                (click)="resetForm()">Restablecer</button>
                         </form>
                     </div>
                 </div>

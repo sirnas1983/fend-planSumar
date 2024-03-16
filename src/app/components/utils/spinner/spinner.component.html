@@ -1,4 +1,5 @@
 <div class="spinner-container">
     <div class="loader"></div>
-    <span class="loading-message">Cargando {{ name }}... por favor espere</span>
+    <span *ngIf="name !== ''" class="loading-message">Cargando {{ name }}... por favor espere</span>
+    <span *ngIf="name === ''" class="loading-message">Aguarde...</span>
 </div>

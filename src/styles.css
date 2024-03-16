@@ -313,3 +313,42 @@
         justify-content: left; 
     }
 }
+
+.navbar-img-container{
+margin-right: 10px;
+}
+
+.navbar-img-img{
+    height: 80px;
+    width: auto;
+}
+
+
+/* SIDEBAR */
+.nav-item-bis {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.nav-item-bis:hover {
+    background-color: lightgrey;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.icon-text i {
+    margin-right: 10px;
+}
+
+.navbar-bis-icon {
+    font-size: 24px;
+    color: #3498db;
+}
+
+.sidebar li{
+    cursor: pointer;
+}
+

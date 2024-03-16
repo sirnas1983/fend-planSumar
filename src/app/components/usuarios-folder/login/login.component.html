@@ -21,16 +21,13 @@
               </div>
               <div class="mt-3">
                 <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                  [disabled]="isLoading">INICIAR SESIÓN</button>
+                  [disabled]="isLoading">
+                  <span *ngIf="!isLoading">INICIAR SESIÓN</span>
+                  <app-spinner *ngIf="isLoading" name="credenciales"></app-spinner>
+                </button>
               </div>
-              <app-spinner *ngIf="isLoading" name="credenciales"></app-spinner>
+
               <div class="my-2 align-items-center">
-                <!-- <div class="form-check">
-                        <label class="form-check-label text-muted">
-                            <input type="checkbox" class="form-check-input">
-                            Mantenme logueado
-                        </label>
-                    </div> -->
                 <a href="#" class="auth-link text-black">¿Olvidaste tu contraseña?</a>
               </div>
               <div class="text-center mt-4 fw-light">
