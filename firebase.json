@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist/plan-nacer",
     "ignore": [
       "firebase.json",
       "**/.*",
